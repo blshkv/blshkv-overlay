@@ -1,0 +1,12 @@
+--- ui/gui_draw.py.orig    2017-05-19 12:52:25.000000000 +0800
++++ ui/gui_draw.py 2017-05-19 12:53:07.648466907 +0800
+@@ -12,6 +12,9 @@
+ import glob
+ import sys
+ from pdb import set_trace as st
++
++import matplotlib as mpl
++mpl.use("Qt4Agg")
+ import matplotlib.pyplot as plt
+ 
+ import skimage

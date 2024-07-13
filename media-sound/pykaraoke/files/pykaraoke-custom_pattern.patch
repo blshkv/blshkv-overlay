@@ -1,0 +1,12 @@
+--- a/pykdb.py.orig	2011-06-22 16:52:34.855172010 +0800
++++ b/pykdb.py	2011-06-22 16:54:11.872172004 +0800
+@@ -213,6 +213,9 @@
+             self.Filepath += 'cdg'
+ 
+         if ZipStoredName:
++            ZipSplit = ZipStoredName.rpartition(".")[0]
++            self.Title = ZipSplit.rpartition("/")[2]
++            self.Artist = ZipSplit.rpartition("/")[0].rpartition("/")[2]
+             self.DisplayFilename = os.path.basename(ZipStoredName)
+             if isinstance(self.DisplayFilename, types.StringType):
+                 self.DisplayFilename = self.DisplayFilename.decode(settings.ZipfileCoding)

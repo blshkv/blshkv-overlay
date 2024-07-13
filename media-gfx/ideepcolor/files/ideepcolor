@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /usr/share/ideepcolor/
+python2 ./ideepcolor.py "$@"

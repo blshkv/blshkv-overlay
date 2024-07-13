@@ -1,0 +1,13 @@
+--- a/logipy/logi_arx.py	2017-08-18 01:18:19.000000000 +0800
++++ b/logipy/logi_arx.py	2024-02-08 12:38:12.284319879 +0800
+@@ -52,8 +52,8 @@
+     on_callback(event_type, event_value, event_arg, context)
+ 
+ def default_callback(event_type, event_value, event_arg, context):
+-    print '\n[Arx] default_callback called with: event_type = {event_type}, event_value = {event_value}, event_arg = {event_arg}, context = {context}'.format(
+-        event_type = event_type, event_value = event_value, event_arg = event_arg, context = context)
++    print('\n[Arx] default_callback called with: event_type = {event_type}, event_value = {event_value}, event_arg = {event_arg}, context = {context}'.format(
++        event_type = event_type, event_value = event_value, event_arg = event_arg, context = context))
+ 
+ # Required Globals
+ #

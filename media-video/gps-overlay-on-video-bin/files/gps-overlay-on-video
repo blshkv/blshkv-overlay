@@ -1,0 +1,10 @@
+#!/bin/sh
+
+DIRNAME=$(dirname "$(readlink -e "$0")")
+DIR=$(cd "$DIRNAME" || exit 112; pwd)
+
+[ "$OSTYPE" = "cygwin" ] \
+&& DIR="$( cygpath -m "$DIR" )"
+
+echo "DIR: $DIR"
+java --add-opens java.desktop/javax.swing.plaf.basic=ALL-UNNAMED -jar "$DIR/gps-overlay-on-video.jar"  $@
