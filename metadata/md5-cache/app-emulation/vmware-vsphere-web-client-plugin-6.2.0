@@ -1,0 +1,13 @@
+DEFINED_PHASES=install nofetch postinst prerm unpack
+DEPEND=dev-libs/libxslt
+DESCRIPTION=Firefox and Chromium plugin, to access virtual machines console from vSphere Web Client
+EAPI=8
+HOMEPAGE=https://docs.vmware.com/en/VMware-Skyline-Collector/services/Planning-and-Deployment-Guide/GUID-E0C9F316-6B63-4547-8119-875C80FA2DAE.html
+INHERIT=vmware-bundle
+IUSE=doc
+LICENSE=vmware
+RESTRICT=strip
+SLOT=0
+SRC_URI=amd64? ( http://vsphereclient.vmware.com/vsphereclient/4/2/7/4/6/6/6/VMware-ClientIntegrationPlugin-6.2.0.x86_64.bundle )
+_eclasses_=vmware-bundle	23c070352c2722510704dae8063293e0
+_md5_=7a776e9f3c92744601fef0ead0da4a57
