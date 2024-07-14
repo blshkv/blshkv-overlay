@@ -1,0 +1,5 @@
+#~sci-electronics/sigrok-cli-0.7.2
+sci-libs/libsigrok **
+sci-electronics/sigrok-cli **
+sci-libs/libsigrokdecode **
+dev-python/simple-websocket
