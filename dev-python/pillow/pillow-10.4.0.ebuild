@@ -6,7 +6,7 @@ EAPI=8
 DISTUTILS_EXT=1
 # setuptools wrapper
 DISTUTILS_USE_PEP517=standalone
-PYTHON_COMPAT=( python3_{10..12} pypy3 )
+PYTHON_COMPAT=( python3_{10..13} pypy3 )
 PYTHON_REQ_USE='tk?,threads(+)'
 
 inherit distutils-r1 toolchain-funcs virtualx
@@ -17,8 +17,8 @@ MY_P=${MY_PN}-${PV}
 DESCRIPTION="Python Imaging Library (fork)"
 HOMEPAGE="
 	https://python-pillow.org/
-	https://github.com/python-pillow/
-	https://pypi.org/project/Pillow/
+	https://github.com/python-pillow/Pillow/
+	https://pypi.org/project/pillow/
 "
 SRC_URI="
 	https://github.com/python-pillow/Pillow/archive/${PV}.tar.gz
@@ -28,7 +28,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="HPND"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~m68k ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux ~arm64-macos ~x64-macos"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ~m68k ~ppc ppc64 ~riscv ~s390 ~sparc x86 ~amd64-linux ~x86-linux ~arm64-macos ~x64-macos"
 IUSE="examples imagequant +jpeg jpeg2k lcms raqm test tiff tk truetype webp xcb zlib"
 REQUIRED_USE="test? ( jpeg jpeg2k lcms tiff truetype )"
 RESTRICT="!test? ( test )"
@@ -55,10 +55,8 @@ BDEPEND="
 	dev-python/wheel[${PYTHON_USEDEP}]
 	virtual/pkgconfig
 	test? (
-		${RDEPEND}
 		dev-python/defusedxml[${PYTHON_USEDEP}]
 		dev-python/packaging[${PYTHON_USEDEP}]
-		dev-python/pytest[${PYTHON_USEDEP}]
 		dev-python/pytest-timeout[${PYTHON_USEDEP}]
 		|| (
 			media-gfx/imagemagick[png]
@@ -67,14 +65,12 @@ BDEPEND="
 	)
 "
 
-EPYTEST_DESELECT=(
-	# TODO; incompatible Qt version?
-	Tests/test_qt_image_qapplication.py::test_sanity
-)
+EPYTEST_XDIST=1
+distutils_enable_tests pytest
 
 PATCHES=(
-	# https://github.com/python-pillow/pillow/pull/7594
-	"${FILESDIR}/${P}-olefile-0.47.patch"
+	# https://github.com/python-pillow/pillow/pull/7634
+	"${FILESDIR}/${PN}-10.2.0-cross.patch"
 )
 
 usepil() {
@@ -82,10 +78,9 @@ usepil() {
 }
 
 python_configure_all() {
-	# It's important that these flags are also passed during the install phase
-	# as well. Make sure of that if you change the lines below. See bug 661308.
 	cat >> setup.cfg <<-EOF || die
 		[build_ext]
+		debug = True
 		disable_platform_guessing = True
 		$(usepil truetype)_freetype = True
 		$(usepil jpeg)_jpeg = True
@@ -99,16 +94,16 @@ python_configure_all() {
 		$(usepil xcb)_xcb = True
 		$(usepil zlib)_zlib = True
 	EOF
+	if use truetype; then
+		# these dependencies are implicitly disabled by USE=-truetype
+		# and we can't pass both disable_* and vendor_*
+		# https://bugs.gentoo.org/935124
+		cat >> setup.cfg <<-EOF || die
+			vendor_raqm = False
+			vendor_fribidi = False
+		EOF
+	fi
 
-	# setup.py won't let us add the right toolchain paths but it does
-	# accept additional ones from INCLUDE and LIB so set these. You
-	# wouldn't normally need these at all as the toolchain should look
-	# here anyway but it doesn't for this setup.py.
-	export \
-		INCLUDE="${ESYSROOT}"/usr/include \
-		LIB="${ESYSROOT}"/usr/$(get_libdir)
-
-	# We have patched in this env var.
 	tc-export PKG_CONFIG
 }
 
@@ -120,11 +115,14 @@ python_test() {
 	local EPYTEST_DESELECT=(
 		# TODO (is clipboard unreliable in Xvfb?)
 		Tests/test_imagegrab.py::TestImageGrab::test_grabclipboard
+		# requires xz-utils[extra-filters]?
+		Tests/test_file_libtiff.py::TestFileLibTiff::test_lzma
 	)
 
 	"${EPYTHON}" selftest.py --installed || die "selftest failed with ${EPYTHON}"
-	# no:relaxed: pytest-relaxed plugin make our tests fail. deactivate if installed
-	epytest -p no:relaxed || die "Tests failed with ${EPYTHON}"
+	local -x PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
+	# leak tests are fragile and broken under xdist
+	epytest -k "not leak" -p timeout || die "Tests failed with ${EPYTHON}"
 }
 
 python_install() {
