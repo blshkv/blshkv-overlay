@@ -1,14 +1,16 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 inherit unpacker
+
 MY_P="${P//-bin/}-1-x86_64.pkg.tar.zst"
 
 DESCRIPTION="Personal genealogical database"
 HOMEPAGE="https://gedkeeper.github.io/"
 SRC_URI="https://github.com/Serg-Norseman/GEDKeeper/releases/download/v${PV}/${MY_P}"
+         #https://github.com/Serg-Norseman/GEDKeeper/releases/download/v3.6.0/gedkeeper-3.6.0-1-x86_64.pkg.tar.zst
 #         https://github.com/Serg-Norseman/GEDKeeper/releases/download/v3.3.0/gedkeeper-3.3.0-1-x86_64.pkg.tar.zst
 
 LICENSE="GPL-3"
