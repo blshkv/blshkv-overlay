@@ -13,7 +13,9 @@ HOMEPAGE="https://github.com/r0x0r/pywebview"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~x86"
+
+#dev-python/PyQtWebEngine ~x86 only
+KEYWORDS="amd64 arm64 ~x86"
 
 # copy USE flags from dev-python/QtPy
 IUSE="gtk +pyqt5"
