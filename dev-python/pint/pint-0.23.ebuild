@@ -19,6 +19,7 @@ IUSE="babel uncertainties test"
 
 DEPEND=""
 RDEPEND="${DEPEND}
+	<dev-python/numpy-2.0[${PYTHON_USEDEP}]
 	babel? ( dev-python/Babel[${PYTHON_USEDEP}] )
 	uncertainties? ( dev-python/uncertainties[${PYTHON_USEDEP}] )
 "
