@@ -16,6 +16,8 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE="datalib"
 
+# jiter dep, see:
+# https://github.com/openai/openai-python/issues/1616
 RDEPEND="
 	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-1.9.0[${PYTHON_USEDEP}]
