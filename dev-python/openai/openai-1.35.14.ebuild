@@ -38,7 +38,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
 
-src_prepare(){
-	cp "${FILESDIR}/1.32.0-README.md" ./README.md || die
-	eapply_user
-}
+#src_prepare(){
+#	cp "${FILESDIR}/1.32.0-README.md" ./README.md || die
+#	eapply_user
+#}

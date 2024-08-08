@@ -24,6 +24,7 @@ RDEPEND="
 	>=dev-python/distro-1.7.0[${PYTHON_USEDEP}]
 	dev-python/sniffio[${PYTHON_USEDEP}]
 	>dev-python/tqdm-4[${PYTHON_USEDEP}]
+	dev-python/jiter[${PYTHON_USEDEP}]
 
 	datalib? (
 		dev-python/numpy[${PYTHON_USEDEP}]
@@ -38,7 +39,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
 
-src_prepare(){
-	cp "${FILESDIR}/${PV}-README.md" ./README.md || die
-	eapply_user
-}
+#src_prepare(){
+#	cp "${FILESDIR}/1.40.0-README.md" ./README.md || die
+#	eapply_user
+#}
