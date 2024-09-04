@@ -23,5 +23,6 @@ ERROR_NET="Lenovo WMI requires CONFIG_ACPI_WMI=y set in the kernel."
 
 src_compile() {
 	local modlist=( legion-wmi=drivers/platform/x86 )
+	local modargs=( KVER="${KV_FULL}" KDIR="${KERNEL_DIR}" )
 	linux-mod-r1_src_compile
 }
