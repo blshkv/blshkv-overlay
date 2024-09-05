@@ -6,7 +6,7 @@ EAPI=8
 MY_PV="${PV//_rc/-RC}"
 inherit qmake-utils
 
-HASH_COMMIT="a0b6b170720bd8e0a74fd7d2d33fe7629eddc58a"
+HASH_COMMIT="735ef1ab0c63098bdf005c54f34aa74f2ac97c24"
 
 DESCRIPTION="Performance Software for Cyclists, Runners, Triathletes and Coaches"
 HOMEPAGE="https://www.goldencheetah.org/ https://github.com/GoldenCheetah/GoldenCheetah"
@@ -14,7 +14,7 @@ SRC_URI="https://github.com/GoldenCheetah/GoldenCheetah/archive/${HASH_COMMIT}.t
 
 LICENSE="GPL-2"
 SLOT="qt6"
-#KEYWORDS="amd64"
+KEYWORDS="amd64"
 IUSE="+oauth"
 
 RDEPEND="sys-devel/flex
