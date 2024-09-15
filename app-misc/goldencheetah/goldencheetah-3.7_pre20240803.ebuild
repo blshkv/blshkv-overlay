@@ -78,7 +78,7 @@ src_configure() {
 }
 src_compile() {
 	eqmake6 -recursive
-	make
+	emake
 }
 
 src_install() {
