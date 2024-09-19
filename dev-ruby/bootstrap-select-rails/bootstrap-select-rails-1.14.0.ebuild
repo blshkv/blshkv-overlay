@@ -20,8 +20,8 @@ RUBY_FAKEGEM_GEMSPEC="bootstrap-select-rails.gemspec"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Bootstrap rubygem for Rails / Sprockets / Hanami / etc"
-HOMEPAGE="https://github.com/twbs/bootstrap-rubygem"
+DESCRIPTION="The jQuery plugin for select elements with Bootstrap 5 support"
+HOMEPAGE="https://github.com/snapappointments/bootstrap-select https://github.com/Slashek/bootstrap-select-rails"
 LICENSE="MIT"
 
 SRC_URI="https://github.com/blshkv/bootstrap-select-rails/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
@@ -30,15 +30,6 @@ RUBY_S="${PN}-${HASH_COMMIT}"
 #wait for ~dev-ruby/sassc-rails
 KEYWORDS="~amd64"
 SLOT="0"
-
-#ruby_add_rdepend "
-#	>=dev-ruby/autoprefixer-rails-9.1.0
-#	>=dev-ruby/popper_js-2.11.8:2
-#"
-
-#all_ruby_prepare() {
-#	sed -i -e '/reporters/I s:^:#:' test/test_helper.rb || die
-#}
 
 all_ruby_prepare() {
 	sed -i -e '/git ls-files/d' bootstrap-select-rails.gemspec || die
