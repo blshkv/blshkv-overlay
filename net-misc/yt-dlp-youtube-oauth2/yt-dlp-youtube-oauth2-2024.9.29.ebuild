@@ -3,13 +3,14 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=hatchling
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit distutils-r1 pypi
+inherit distutils-r1
 
 DESCRIPTION="yt-dlp plugin that adds OAuth2 login support"
 HOMEPAGE="https://github.com/coletdjnz/yt-dlp-youtube-oauth2"
+SRC_URI="https://github.com/coletdjnz/yt-dlp-youtube-oauth2/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="Unlicense"
 SLOT="0"
