@@ -23,6 +23,7 @@ IUSE="fuse ldap mariadb mysql psd saml sqlite"
 RDEPEND="${PYTHON_DEPS}
 	=app-misc/elasticsearch-8*
 	$(python_gen_cond_dep '
+	=dev-python/django-4.2*[${PYTHON_USEDEP}]
 	>=dev-python/pillow-10.0.0[${PYTHON_USEDEP}]
 	dev-python/pylibmc[${PYTHON_USEDEP}]
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
