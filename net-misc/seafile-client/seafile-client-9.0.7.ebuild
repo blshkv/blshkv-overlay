@@ -4,7 +4,7 @@
 EAPI=8
 
 # Upstream is moving tags repeatedly, then we use commit hash.
-RELEASE_COMMIT="47533e06ff8bca5e0f7895581b3bbad1b78cfcea"
+RELEASE_COMMIT="1133609a0203affb1faae798872ab64c73cd0bbf"
 
 inherit xdg cmake
 

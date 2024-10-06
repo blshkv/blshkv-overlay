@@ -6,7 +6,7 @@ EAPI=8
 PYTHON_COMPAT=( python3_{10..12} )
 
 # Upstream is moving tags repeatedly, then we use commit hash.
-RELEASE_COMMIT="b5c8e027ad50a1422f27d218c13f82a8f10018d2"
+RELEASE_COMMIT="ae515945c397dd2a94983327fb99cdc9b53d4f73"
 
 inherit autotools python-single-r1 vala
 
