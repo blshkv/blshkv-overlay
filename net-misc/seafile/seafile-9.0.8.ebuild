@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,14 +6,15 @@ EAPI=8
 PYTHON_COMPAT=( python3_{10..12} )
 
 # Upstream is moving tags repeatedly, then we use commit hash.
-RELEASE_COMMIT="12c4621cdcd59fe8f71f621f9e0320aeb7cbfb5c"
+#RELEASE_COMMIT="12c4621cdcd59fe8f71f621f9e0320aeb7cbfb5c"
 
 inherit autotools python-single-r1 vala
 
 DESCRIPTION="File syncing and sharing software with file encryption and group sharing"
 HOMEPAGE="https://www.seafile.com/ https://github.com/haiwen/seafile/"
-SRC_URI="https://github.com/haiwen/${PN}/archive/${RELEASE_COMMIT}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/${PN}-${RELEASE_COMMIT}"
+#SRC_URI="https://github.com/haiwen/${PN}/archive/${RELEASE_COMMIT}.tar.gz -> ${P}.tar.gz"
+#S="${WORKDIR}/${PN}-${RELEASE_COMMIT}"
+SRC_URI="https://github.com/haiwen/seafile/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="GPL-2+-with-openssl-exception"
 SLOT="0"

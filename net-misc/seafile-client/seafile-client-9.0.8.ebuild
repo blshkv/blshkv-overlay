@@ -1,17 +1,18 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 # Upstream is moving tags repeatedly, then we use commit hash.
-RELEASE_COMMIT="e9a339a7bafd5322926fc65a0136396d67c9062d"
+#RELEASE_COMMIT="e9a339a7bafd5322926fc65a0136396d67c9062d"
 
 inherit xdg cmake
 
 DESCRIPTION="Seafile desktop client"
 HOMEPAGE="https://www.seafile.com/ https://github.com/haiwen/seafile-client/"
-SRC_URI="https://github.com/haiwen/${PN}/archive/${RELEASE_COMMIT}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/${PN}-${RELEASE_COMMIT}"
+#SRC_URI="https://github.com/haiwen/${PN}/archive/${RELEASE_COMMIT}.tar.gz -> ${P}.tar.gz"
+#S="${WORKDIR}/${PN}-${RELEASE_COMMIT}"
+SRC_URI="https://github.com/haiwen/seafile-client/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
