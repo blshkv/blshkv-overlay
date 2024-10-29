@@ -6,7 +6,7 @@ EAPI=7
 #EGIT_REPO_URI="git://github.com/BVLC/caffe.git"
 #EGIT_REPO_URI="git://github.com/NVIDIA/caffe"
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{12..13} )
 
 inherit toolchain-funcs multilib python-single-r1
 # Can't use cuda.eclass as nvcc does not like --compiler-bindir set there for some reason
