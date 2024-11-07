@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="amd64"
 IUSE="fuse ldap mariadb mysql psd saml sqlite"
 
-# https://manual.seafile.com/upgrade/upgrade_notes_for_11.0.x/
+# https://manual.seafile.com/latest/upgrade/upgrade_notes_for_11.0.x/
 # https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
 
 RDEPEND="${PYTHON_DEPS}
