@@ -15,10 +15,9 @@ SRC_URI="https://download.seafile.com/d/6e5297246c/files/?p=%2Fpro%2F${MY_P}&dl=
 LICENSE="seafile"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="fuse ldap mariadb mysql psd saml sqlite"
+IUSE="fuse +ldap mariadb mysql psd saml sqlite"
 
-# https://manual.seafile.com/latest/upgrade/upgrade_notes_for_11.0.x/
-# https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
+# https://manual.seafile.com/11.0/changelog/changelog-for-seafile-professional-server/
 
 RDEPEND="${PYTHON_DEPS}
 	=app-misc/elasticsearch-8*
@@ -59,9 +58,17 @@ src_prepare() {
 #	sed -e "s|1.14.0|${CFFI_PV}|" -i seahub/thirdpart/cffi/__init__.py || die "sed failed"
 	rm -r seahub/thirdpart/{cffi*,requests*}
 	eapply_user
+
+# FIXME: add the following patch:
+# https://forum.seafile.com/t/fresh-seahub-11-0-2-install-seahub-failed-to-start/18981/5
+# /opt/seafile/seafile-server-11.0.3/seahub/seahub/utils/init .py Line 577
+# -except ImportError:
+# +except :
+
 }
 
 pkg_postinst() {
-	einfo "follow the official documentation:"
-	einfo "https://manual.seafile.com/deploy_pro/download_and_setup_seafile_professional_server/"
+	elog "follow the official documentation:"
+	elog "https://manual.seafile.com/11.0/deploy_pro/"
+	elog "https://manual.seafile.com/11.0/upgrade/upgrade_notes_for_11.0.x/"
 }
