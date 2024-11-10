@@ -23,7 +23,7 @@ RDEPEND="dev-ruby/mysql2[mysql?,mariadb?]
 	dev-ruby/ckeditor_rails
 	dev-ruby/jbuilder
 	dev-ruby/jquery-rails:4
-	dev-ruby/jquery-ui-rails:6
+	dev-ruby/jquery-ui-rails:7
 	dev-ruby/mini_magick
 	media-gfx/imagemagick[png,jpeg]
 	dev-ruby/rake
