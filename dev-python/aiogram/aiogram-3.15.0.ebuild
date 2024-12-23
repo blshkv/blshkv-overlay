@@ -28,7 +28,7 @@ RDEPEND="
 		>=dev-python/uvloop-0.17.0[${PYTHON_USEDEP}]
 		>=dev-python/aiodns-3.0.0[${PYTHON_USEDEP}]
 	)
-	i18n? ( >=dev-python/Babel-2.13.0[${PYTHON_USEDEP}] )
+	i18n? ( >=dev-python/babel-2.13.0[${PYTHON_USEDEP}] )
 	proxy? ( >=dev-python/aiohttp-socks-0.8.3[${PYTHON_USEDEP}] )
 	redis? ( >=dev-python/redis-5.0.1[${PYTHON_USEDEP}]
 		dev-python/hiredis[${PYTHON_USEDEP}] )
