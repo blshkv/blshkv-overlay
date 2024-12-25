@@ -19,7 +19,7 @@ IUSE="datalib"
 # jiter dep, see:
 # https://github.com/openai/openai-python/issues/1616
 RDEPEND="
-	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}] <dev-python/httpx-0.28.0
+	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-1.9.0[${PYTHON_USEDEP}]
 	>=dev-python/typing-extensions-4.11[${PYTHON_USEDEP}]
 	>=dev-python/anyio-3.5.0[${PYTHON_USEDEP}]
