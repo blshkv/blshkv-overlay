@@ -17,13 +17,13 @@ HOMEPAGE="https://github.com/time4tea/gopro-dashboard-overlay"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE=""
 
 RDEPEND="
 	>=dev-python/pillow-10.1.0[raqm,${PYTHON_USEDEP}]
 	>=dev-python/pint-0.22[${PYTHON_USEDEP}]
-	>=dev-python/geotiler-0.15[${PYTHON_USEDEP}]
+	>=dev-python/geotiler-0.15[${PYTHON_USEDEP}] <dev-python/geotiler-0.20.0
 	>=dev-python/gpxpy-1.6.1[${PYTHON_USEDEP}]
 	>=dev-python/fitdecode-0.10.0[${PYTHON_USEDEP}]
 	dev-python/geographiclib[${PYTHON_USEDEP}]
