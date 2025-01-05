@@ -5,4 +5,8 @@
 		<email>blshkv@pentoo.ch</email>
 		<name>Anton Bolshakov</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">rails-api/active_model_serializers</remote-id>
+	</upstream>
 </pkgmetadata>
+
