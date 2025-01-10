@@ -14,9 +14,9 @@ SRC_URI="https://github.com/coletdjnz/yt-dlp-youtube-oauth2/archive/refs/tags/v$
 
 LICENSE="Unlicense"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+#absolute
+#KEYWORDS="~amd64 ~arm64 ~x86"
 
-#RDEPEND=""
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
