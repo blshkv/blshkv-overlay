@@ -15,10 +15,9 @@ SRC_URI="https://download.seafile.com/d/6e5297246c/files/?p=%2Fpro%2F${MY_P}&dl=
 LICENSE="seafile"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="fuse mariadb mysql psd saml sqlite"
+IUSE="fuse +ldap mariadb mysql psd saml sqlite"
 
-# https://manual.seafile.com/upgrade/upgrade_notes_for_10.0.x/
-# https://manual.seafile.com/changelog/changelog-for-seafile-professional-server/
+# https://manual.seafile.com/11.0/changelog/changelog-for-seafile-professional-server/
 
 RDEPEND="${PYTHON_DEPS}
 	=app-misc/elasticsearch-8*
@@ -29,7 +28,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
 
 	dev-python/jinja2[${PYTHON_USEDEP}]
-	<dev-python/sqlalchemy-2.0.3[sqlite?,${PYTHON_USEDEP}]
+	>dev-python/sqlalchemy-2.0.18[sqlite?,${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
@@ -42,6 +41,7 @@ RDEPEND="${PYTHON_DEPS}
 
 	')
 	fuse? ( sys-fs/fuse:0 )
+	ldap? ( $(python_gen_cond_dep ' dev-python/python-ldap[${PYTHON_USEDEP}]') )
 	mariadb? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	saml?  ( $(python_gen_cond_dep ' dev-python/djangosaml2[${PYTHON_USEDEP}]') )
@@ -53,14 +53,22 @@ DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare() {
-#	eapply "${FILESDIR}"/pillow-10.patch
+	#eapply "${FILESDIR}"/pillow-10.patch
 	#match with cffi in RDEPEND section
 #	sed -e "s|1.14.0|${CFFI_PV}|" -i seahub/thirdpart/cffi/__init__.py || die "sed failed"
 	rm -r seahub/thirdpart/{cffi*,requests*}
 	eapply_user
+
+# FIXME: add the following patch:
+# https://forum.seafile.com/t/fresh-seahub-11-0-2-install-seahub-failed-to-start/18981/5
+# /opt/seafile/seafile-server-11.0.3/seahub/seahub/utils/init .py Line 577
+# -except ImportError:
+# +except :
+
 }
 
 pkg_postinst() {
-	einfo "follow the official documentation:"
-	einfo "https://manual.seafile.com/deploy_pro/download_and_setup_seafile_professional_server/"
+	elog "follow the official documentation:"
+	elog "https://manual.seafile.com/11.0/deploy_pro/"
+	elog "https://manual.seafile.com/11.0/upgrade/upgrade_notes_for_11.0.x/"
 }
