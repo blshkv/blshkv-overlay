@@ -16,14 +16,17 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 x86"
 IUSE="datalib"
 
+# jiter dep, see:
+# https://github.com/openai/openai-python/issues/1616
 RDEPEND="
 	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-1.9.0[${PYTHON_USEDEP}]
-	>=dev-python/typing-extensions-4.7[${PYTHON_USEDEP}]
+	>=dev-python/typing-extensions-4.11[${PYTHON_USEDEP}]
 	>=dev-python/anyio-3.5.0[${PYTHON_USEDEP}]
 	>=dev-python/distro-1.7.0[${PYTHON_USEDEP}]
 	dev-python/sniffio[${PYTHON_USEDEP}]
 	>dev-python/tqdm-4[${PYTHON_USEDEP}]
+	dev-python/jiter[${PYTHON_USEDEP}]
 
 	datalib? (
 		dev-python/numpy[${PYTHON_USEDEP}]
@@ -39,6 +42,6 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RESTRICT="test"
 
 #src_prepare(){
-#	cp "${FILESDIR}/1.32.0-README.md" ./README.md || die
+#	cp "${FILESDIR}/1.40.0-README.md" ./README.md || die
 #	eapply_user
 #}
