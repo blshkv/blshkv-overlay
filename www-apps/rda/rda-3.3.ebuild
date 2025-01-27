@@ -34,5 +34,5 @@ RDEPEND="dev-ruby/mysql2[mysql?,mariadb?]
 	dev-ruby/rack-cors
 	dev-ruby/grape-active_model_serializers
 	dev-ruby/sass-rails:*
-	dev-ruby/coffee-rails
 	"
+#	dev-ruby/coffee-rails
