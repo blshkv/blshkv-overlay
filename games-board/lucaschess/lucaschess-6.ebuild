@@ -24,7 +24,7 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/sortedcontainers-2.1.0[${PYTHON_USEDEP}]
 	>=dev-python/chess-0.28.3[${PYTHON_USEDEP}]
 	>=dev-python/pillow-7.0.0[${PYTHON_USEDEP}]
-	dev-python/pyside6[multimedia,${PYTHON_USEDEP}]
+	>=dev-python/pyside-6.0.0[multimedia,${PYTHON_USEDEP}]
 	>=dev-python/cython-0.29.20[${PYTHON_USEDEP}]
 	>=dev-python/psutil-5.8.0[${PYTHON_USEDEP}]
 	>=dev-python/polib-1.1.1[${PYTHON_USEDEP}]
