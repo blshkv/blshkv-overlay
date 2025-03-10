@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,7 +6,7 @@ EAPI=8
 PYTHON_COMPAT=( python3_{12..13} )
 inherit python-single-r1
 
-MY_P="seafile-pro-server_${PV}_x86-64_CentOS.tar.gz"
+MY_P="seafile-pro-server_${PV}_x86-64_Ubuntu.tar.gz"
 
 DESCRIPTION="Meta package for Seafile Pro Edition, file sync share solution"
 HOMEPAGE="https://www.seafile.com/en/product/private_server/"
@@ -14,10 +14,10 @@ SRC_URI="https://download.seafile.com/d/6e5297246c/files/?p=%2Fpro%2F${MY_P}&dl=
 
 LICENSE="seafile"
 SLOT="0"
-KEYWORDS="amd64"
-IUSE="fuse +ldap mariadb mysql psd saml sqlite"
+KEYWORDS="~amd64"
+IUSE="fuse +ldap mariadb mysql psd saml"
 
-# https://manual.seafile.com/11.0/changelog/changelog-for-seafile-professional-server/
+# https://manual.seafile.com/12.0/changelog/changelog-for-seafile-professional-server/
 
 RDEPEND="${PYTHON_DEPS}
 	=app-misc/elasticsearch-8*
@@ -28,7 +28,7 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
 
 	dev-python/jinja2[${PYTHON_USEDEP}]
-	>dev-python/sqlalchemy-2.0.18[sqlite?,${PYTHON_USEDEP}]
+	>dev-python/sqlalchemy-2.0.18[${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
@@ -69,6 +69,6 @@ src_prepare() {
 
 pkg_postinst() {
 	elog "follow the official documentation:"
-	elog "https://manual.seafile.com/11.0/deploy_pro/"
-	elog "https://manual.seafile.com/11.0/upgrade/upgrade_notes_for_11.0.x/"
+	elog "https://manual.seafile.com/12.0/setup/setup_pro_by_docker/"
+	elog "https://manual.seafile.com/12.0/upgrade/upgrade_notes_for_12.0.x/"
 }
