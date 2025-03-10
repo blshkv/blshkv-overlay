@@ -6,7 +6,7 @@ EAPI=8
 MY_PV="${PV//_rc/-RC}"
 inherit qmake-utils
 
-HASH_COMMIT="735ef1ab0c63098bdf005c54f34aa74f2ac97c24"
+HASH_COMMIT="84ad06657eff9b63cf88f8830413a9a53a944b8a"
 
 DESCRIPTION="Performance Software for Cyclists, Runners, Triathletes and Coaches"
 HOMEPAGE="https://www.goldencheetah.org/ https://github.com/GoldenCheetah/GoldenCheetah"
