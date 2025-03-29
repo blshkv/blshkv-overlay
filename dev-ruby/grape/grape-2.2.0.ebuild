@@ -12,9 +12,7 @@ HOMEPAGE="https://github.com/ruby-grape/grape"
 
 LICENSE="MIT"
 SLOT="0"
-
-#https://github.com/ruby-grape/grape-active_model_serializers/issues/94
-#KEYWORDS="amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 ruby_add_rdepend "
 	dev-ruby/activesupport:*
