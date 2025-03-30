@@ -16,7 +16,7 @@ KEYWORDS="~amd64"
 IUSE="mysql mariadb"
 
 RDEPEND="dev-ruby/mysql2[mysql?,mariadb?]
-	dev-ruby/rails:6.1
+	dev-ruby/rails:7.1
 	|| ( dev-ruby/activerecord:7.1 dev-ruby/activerecord:7.0 dev-ruby/activerecord:6.1 )
 	dev-ruby/activerecord-session_store
 	dev-ruby/bootstrap
