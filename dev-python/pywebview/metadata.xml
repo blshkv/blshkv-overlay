@@ -10,6 +10,6 @@
 		<remote-id type="pypi">pywebview</remote-id>
 	</upstream>
 	<use>
-		<flag name="pyqt5">Use <pkg>dev-python/PyQt5</pkg> as Qt for Python implementation</flag>
+		<flag name="pyqt5">Use <pkg>dev-python/pyqt5</pkg> as Qt for Python implementation</flag>
 	</use>
 </pkgmetadata>

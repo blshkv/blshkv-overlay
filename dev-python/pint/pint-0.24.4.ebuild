@@ -17,11 +17,10 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 IUSE="babel numpy test uncertainties"
 
-DEPEND=""
 RDEPEND="${DEPEND}
 	numpy? ( dev-python/numpy[${PYTHON_USEDEP}] )
 	uncertainties? ( dev-python/uncertainties[${PYTHON_USEDEP}] )
-	babel? ( dev-python/Babel[${PYTHON_USEDEP}] )
+	babel? ( dev-python/babel[${PYTHON_USEDEP}] )
 
 	dev-python/appdirs[${PYTHON_USEDEP}]
 	dev-python/typing-extensions[${PYTHON_USEDEP}]

@@ -32,9 +32,9 @@ RDEPEND="
 		net-libs/webkit-gtk
 	)
 	pyqt5? (
-		dev-python/QtPy[${PYTHON_USEDEP},webengine]
-		dev-python/PyQt5[${PYTHON_USEDEP}]
-		dev-python/PyQtWebEngine[${PYTHON_USEDEP}]
+		dev-python/qtpy[${PYTHON_USEDEP},webengine]
+		dev-python/pyqt5[${PYTHON_USEDEP}]
+		dev-python/pyqtwebengine[${PYTHON_USEDEP}]
 	)
 	"
 #	qt5? (
