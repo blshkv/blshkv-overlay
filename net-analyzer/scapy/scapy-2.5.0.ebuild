@@ -6,6 +6,7 @@ EAPI=8
 # See https://github.com/secdev/scapy/pull/3958#discussion_r1161302244 on next
 # bump (>2.5.0)!
 
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..13} )
 inherit distutils-r1 readme.gentoo-r1
 

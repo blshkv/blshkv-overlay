@@ -4,7 +4,10 @@
 EAPI=8
 
 DISTUTILS_OPTIONAL=1
+
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..13} )
+
 MY_PV=${PV/_rc/-rc}
 MY_P=${PN}-${MY_PV}
 DEP_VER="$(ver_cut 1-2)"
@@ -157,7 +160,7 @@ PDEPEND="python? (
 # see https://discuss.tensorflow.org/t/undefined-references-to-mlir-ciface-symbols/20571
 # bazel-6.3 failed with undefined reference to `riegeli::RecordsMetadata::Clear()'
 # tested successfully on bazel-6.1.2, bazel-6.2.0 and bazel-6.2.1
-BDEPEND="
+BDEPEND="${DISTUTILS_DEPS}
 	app-arch/unzip
 	=dev-build/bazel-6*
 	<dev-build/bazel-6.3
