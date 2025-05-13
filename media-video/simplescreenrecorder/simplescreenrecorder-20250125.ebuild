@@ -6,8 +6,8 @@ EAPI=8
 MY_PN="ssr"
 inherit cmake-multilib flag-o-matic xdg
 
+# https://github.com/MaartenBaert/ssr/issues/1053
 HASH_COMMIT="c50e83eea53f45eff503af58e6c86d0e928222f3"
-#SRC_URI="https://github.com/junyanz/interactive-deep-colorization/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 
 DESCRIPTION="Simple Screen Recorder"
 HOMEPAGE="https://www.maartenbaert.be/simplescreenrecorder/"
@@ -17,7 +17,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_BOOTSTRAP=""
 else
 	SRC_URI="https://github.com/MaartenBaert/${MY_PN}/archive/${HASH_COMMIT}.tar.gz -> ${P}.gh.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 ~x86"
 	S="${WORKDIR}/${MY_PN}-${HASH_COMMIT}"
 fi
 
