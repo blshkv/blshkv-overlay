@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,11 +10,10 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Asynchronous interface for peewee ORM powered by asyncio."
 HOMEPAGE="https://github.com/05bit/peewee-async"
-#SRC_URI="https://github.com/05bit/peewee-async/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="postgres"
 
 RDEPEND=">=dev-python/peewee-3.15.5[${PYTHON_USEDEP}]
