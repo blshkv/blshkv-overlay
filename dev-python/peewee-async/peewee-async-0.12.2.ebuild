@@ -27,3 +27,13 @@ RDEPEND=">=dev-python/peewee-3.15.5[${PYTHON_USEDEP}]
 
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+python_install() {
+	distutils-r1_python_install
+
+	# install include files
+	# https://github.com/05bit/peewee-async/issues/317
+	python_domodule peewee_asyncext.py
+	# $(python_get_sitedir)/${PN}/
+	python_domodule peewee_async_compat.py
+}
