@@ -33,6 +33,7 @@ BDEPEND="
 "
 
 PATCHES=(
+	#https://github.com/inode64/inode64-overlay/issues/35
 	"${FILESDIR}/python-dateutil-2.8.2-system-tzdata.patch"
 	"${FILESDIR}/python-dateutil-2.8.1-no-pytest-cov.patch"
 )
