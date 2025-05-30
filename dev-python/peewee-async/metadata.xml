@@ -11,4 +11,8 @@
 		<remote-id type="pypi">peewee-async</remote-id>
 	</upstream>
 
+	<use>
+		<flag name="psycopg">PostgreSQL psycopg3 backend support</flag>
+	</use>
+
 </pkgmetadata>
