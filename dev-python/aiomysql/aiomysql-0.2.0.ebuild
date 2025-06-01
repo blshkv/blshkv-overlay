@@ -19,9 +19,13 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 x86"
 
-RDEPEND="dev-python/pymysql[${PYTHON_USEDEP}]"
-#	dev-python/setuptools-scm[${PYTHON_USEDEP}]
-#	dev-python/setuptools_scm_git_archive[${PYTHON_USEDEP}]
+IUSE="sqlalchemy"
+
+RDEPEND="dev-python/pymysql[${PYTHON_USEDEP}]
+	sqlalchemy? ( dev-python/sqlalchemy[${PYTHON_USEDEP}] )
+"
+#        PyMySQL[rsa]
+
 BDEPEND="
 	test? (
 		$(python_gen_impl_dep "ssl")
@@ -41,8 +45,7 @@ EPYTEST_IGNORE=(
 
 distutils_enable_tests pytest
 
-#distutils_enable_sphinx docs \
-#	dev-python/sphinxcontrib-asyncio
+distutils_enable_sphinx docs dev-python/sphinx
 
 python_test() {
 	epytest "${S}"/tests --mysql-unix-socket "$(emysql --get-sockfile)"
