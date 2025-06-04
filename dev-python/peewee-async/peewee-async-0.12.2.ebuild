@@ -38,3 +38,8 @@ python_install() {
 	# $(python_get_sitedir)/${PN}/
 	python_domodule peewee_async_compat.py
 }
+
+pkg_postinst() {
+	ewarn "This is a migration version, see:"
+	ewarn "https://github.com/05bit/peewee-async/issues/316"
+}

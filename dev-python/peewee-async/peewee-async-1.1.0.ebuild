@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/05bit/peewee-async"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="mysql postgres psycopg"
 
 RDEPEND=">=dev-python/peewee-3.15.5[${PYTHON_USEDEP}]
