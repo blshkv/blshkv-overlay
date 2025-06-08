@@ -32,6 +32,8 @@ VERIFY_SIG_OPENPGP_KEY_PATH="/usr/share/openpgp-keys/yubico.com.asc"
 # - 'ykman oath'
 # - 'ykman openpgp'
 # - 'ykman piv'
+
+#https://bugs.gentoo.org/957546
 RDEPEND="
 	app-crypt/ccid
 	>=dev-python/click-8.0[${PYTHON_USEDEP}]
