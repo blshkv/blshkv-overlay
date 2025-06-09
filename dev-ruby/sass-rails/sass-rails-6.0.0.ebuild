@@ -13,11 +13,11 @@ inherit ruby-fakegem
 
 DESCRIPTION="Official Ruby-on-Rails Integration with Sass"
 HOMEPAGE="https://github.com/rails/sass-rails"
-SRC_URI="https://github.com/rails/sass-rails/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/rails/sass-rails/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz"
 
 LICENSE="MIT"
 SLOT="$(ver_cut 1-2)"
-KEYWORDS="~amd64 ~arm64 ~ppc ~ppc64 ~x86 ~amd64-linux"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
 # Restrict tests for now since it is hard to set up the right
 # environment with the correct ruby interpreter and Rails test

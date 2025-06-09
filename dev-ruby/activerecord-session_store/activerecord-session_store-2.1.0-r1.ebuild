@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,10 +15,11 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 ruby_add_rdepend "
-	|| ( dev-ruby/activerecord:7.0 dev-ruby/activerecord:6.1 dev-ruby/activerecord:7.1 )
-	|| ( dev-ruby/actionpack:7.0 dev-ruby/actionpack:6.1 dev-ruby/actionpack:7.1 )
-	|| ( dev-ruby/rack:3.0 dev-ruby/rack:2.2  )
-	|| ( dev-ruby/railties:7.0 dev-ruby/railties:6.1 dev-ruby/railties:7.1 )
+	|| ( dev-ruby/activerecord:7.1 dev-ruby/activerecord:7.0 )
+	|| ( dev-ruby/actionpack:7.1 dev-ruby/actionpack:7.0 )
+	>=dev-ruby/cgi-0.3.6
+	|| ( dev-ruby/rack:3.1 dev-ruby/rack:3.0 dev-ruby/rack:2.2  )
+	|| ( dev-ruby/railties:7.1 dev-ruby/railties:7.0 )
 	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1*
 "
 ruby_add_bdepend "test? ( dev-ruby/sqlite3 )"

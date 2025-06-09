@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby32 ruby33"
+USE_RUBY="ruby32"
 
 inherit ruby-single
 
@@ -11,13 +11,13 @@ DESCRIPTION="Web-based application for effective reporting writing"
 HOMEPAGE="https://www.itdefence.asia"
 
 LICENSE="default_evil"
-SLOT="3"
+SLOT="3.2"
 KEYWORDS="~amd64"
 IUSE="mysql mariadb"
 
 RDEPEND="dev-ruby/mysql2[mysql?,mariadb?]
 	dev-ruby/rails:7.1
-	|| ( dev-ruby/activerecord:7.1 dev-ruby/activerecord:7.0 dev-ruby/activerecord:6.1 )
+	|| ( dev-ruby/activerecord:7.1 dev-ruby/activerecord:7.0 )
 	dev-ruby/activerecord-session_store
 	dev-ruby/bootstrap
 	dev-ruby/ckeditor_rails
