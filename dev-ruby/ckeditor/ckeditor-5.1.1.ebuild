@@ -12,7 +12,6 @@ HOMEPAGE="https://github.com/galetahub/ckeditor"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
-IUSE=""
+KEYWORDS="amd64 arm64 x86"
 
 ruby_add_rdepend "dev-ruby/orm_adapter"
