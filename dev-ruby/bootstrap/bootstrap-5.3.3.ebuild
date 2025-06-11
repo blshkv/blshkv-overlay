@@ -19,7 +19,7 @@ SLOT="5"
 
 #wait for ~dev-ruby/sassc-rails
 # no x86 for dev-ruby/autoprefixer-rails
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
 ruby_add_rdepend "
 	>=dev-ruby/autoprefixer-rails-9.1.0

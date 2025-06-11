@@ -12,7 +12,7 @@ HOMEPAGE="https://github.com/rails/activerecord-session_store"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 ruby_add_rdepend "
 	|| ( dev-ruby/activerecord:7.1 dev-ruby/activerecord:7.0 )

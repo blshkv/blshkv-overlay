@@ -8,11 +8,11 @@ USE_RUBY="ruby32 ruby33"
 inherit ruby-single
 
 DESCRIPTION="Web-based application for effective reporting writing"
-HOMEPAGE="https://www.itdefence.asia"
+HOMEPAGE="https://www.google.com"
 
 LICENSE="default_evil"
-SLOT="3.3"
-KEYWORDS="~amd64"
+SLOT="0"
+KEYWORDS="amd64"
 IUSE="mysql mariadb"
 
 RDEPEND="${RUBY_DEPS}
