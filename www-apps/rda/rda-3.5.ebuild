@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby33"
+USE_RUBY="ruby32 ruby33"
 
 inherit ruby-single
 
