@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -27,8 +27,8 @@ LICENSE="MIT"
 SRC_URI="https://github.com/blshkv/bootstrap-select-rails/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
 RUBY_S="${PN}-${HASH_COMMIT}"
 
-#wait for ~dev-ruby/sassc-rails
-KEYWORDS="~amd64"
+# not stable: dev-ruby/sassc-rails
+KEYWORDS="~amd64 ~arm64 x86"
 SLOT="0"
 
 all_ruby_prepare() {

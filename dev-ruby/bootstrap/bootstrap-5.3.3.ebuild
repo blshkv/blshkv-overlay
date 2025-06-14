@@ -17,7 +17,6 @@ HOMEPAGE="https://github.com/twbs/bootstrap-rubygem"
 LICENSE="MIT"
 SLOT="5"
 
-#wait for ~dev-ruby/sassc-rails
 # no x86 for dev-ruby/autoprefixer-rails
 KEYWORDS="~amd64 ~arm64 ~x86"
 
