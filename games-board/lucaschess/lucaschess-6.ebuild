@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -35,8 +35,9 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/idna-2.10[${PYTHON_USEDEP}]
 	>=dev-python/certifi-2024.2.2[${PYTHON_USEDEP}]
 	>=dev-python/beautifulsoup4-1.10.0[${PYTHON_USEDEP}]
-
+	dev-python/audioop-lts[${PYTHON_USEDEP}]
 "
+
 DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
