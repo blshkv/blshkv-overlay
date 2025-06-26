@@ -1,19 +1,17 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-MY_PV="${PV//_rc/-RC}"
 inherit qmake-utils
-
-HASH_COMMIT="84ad06657eff9b63cf88f8830413a9a53a944b8a"
 
 DESCRIPTION="Performance Software for Cyclists, Runners, Triathletes and Coaches"
 HOMEPAGE="https://www.goldencheetah.org/ https://github.com/GoldenCheetah/GoldenCheetah"
-SRC_URI="https://github.com/GoldenCheetah/GoldenCheetah/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/GoldenCheetah/GoldenCheetah/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+S="${WORKDIR}"/GoldenCheetah-${PV}
 
 LICENSE="GPL-2"
-SLOT="qt6"
+SLOT="0"
 KEYWORDS="amd64"
 IUSE="+oauth"
 
@@ -52,8 +50,6 @@ DEPEND="${RDEPEND}"
 #   - R       - If you want R charts
 #   - Python  - If you want Python charts, scripts and data processors
 
-S="${WORKDIR}"/GoldenCheetah-${HASH_COMMIT}
-
 src_prepare() {
 	cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
 	cp src/gcconfig.pri.in src/gcconfig.pri
@@ -63,7 +59,7 @@ src_prepare() {
 	sed -i '/GSL_INCLUDES = \/usr\/include/s/^#//g' src/gcconfig.pri
 	sed -i '/GSL_LIBS = -lgsl/s/^#//g' src/gcconfig.pri
 	sed -i '/QMAKE_LRELEASE/s/^#//g' src/gcconfig.pri
-	sed -i 's|/usr/bin/lrelease|/usr/lib64/qt5/bin/lrelease|g' src/gcconfig.pri
+	sed -i 's|/usr/bin/lrelease|/usr/lib64/qt6/bin/lrelease|g' src/gcconfig.pri
 	sed -i '/QMAKE_CXXFLAGS/s/^#//g' src/gcconfig.pri
 	sed -i '/QMAKE_LEX  = flex/s/^#//g' src/gcconfig.pri
 	sed -i '/QMAKE_YACC = bison/s/^#//g' src/gcconfig.pri
@@ -82,5 +78,5 @@ src_compile() {
 }
 
 src_install() {
-	newbin src/GoldenCheetah goldencheetah-"${SLOT}"
+	newbin src/GoldenCheetah goldencheetah
 }

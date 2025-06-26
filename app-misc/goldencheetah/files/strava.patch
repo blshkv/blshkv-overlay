@@ -1,0 +1,12 @@
+--- a/src/gcconfig.pri.orig	2025-06-26 10:25:27.929622175 +0800
++++ b/src/gcconfig.pri	2025-06-26 10:34:43.526590474 +0800
+@@ -262,3 +262,9 @@
+ #DEFINES += GC_WANT_TRAINERDAY_API
+ #DEFINES += GC_TRAINERDAY_API_KEY=\\\"INSERT YOUR API_KEY\\\"
+ #DEFINES += GC_TRAINERDAY_API_PAGESIZE=25
++
++# Strava API key
++# API keys can be requested here: https://developers.strava.com/docs/getting-started/
++DEFINES += GC_STRAVA_CLIENT_ID=\\\"12345\\\"
++DEFINES += GC_STRAVA_CLIENT_SECRET=\\\"0000000000000000000000000000000000000000\\\"
++DEFINES += STRAVA_DEBUG=true
