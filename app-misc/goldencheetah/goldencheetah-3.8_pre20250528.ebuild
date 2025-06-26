@@ -6,7 +6,7 @@ EAPI=8
 MY_PV="${PV//_rc/-RC}"
 MY_P="GoldenCheetah"
 
-inherit qmake-utils
+inherit qmake-utils desktop
 
 HASH_COMMIT="708b18ca012b65bf8b978eaef3864975e6eb1af6"
 
@@ -84,4 +84,6 @@ src_compile() {
 
 src_install() {
 	newbin src/${MY_P} goldencheetah
+	make_desktop_entry ${PN} "GoldenCheetah" goldencheetah.png "Science;Sports;"
+	doicon "${FILESDIR}"/goldencheetah.png
 }

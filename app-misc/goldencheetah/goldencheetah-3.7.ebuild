@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit qmake-utils
+inherit qmake-utils desktop
 
 DESCRIPTION="Performance Software for Cyclists, Runners, Triathletes and Coaches"
 HOMEPAGE="https://www.goldencheetah.org/ https://github.com/GoldenCheetah/GoldenCheetah"
@@ -78,5 +78,7 @@ src_compile() {
 }
 
 src_install() {
-	newbin src/GoldenCheetah goldencheetah
+	newbin src/GoldenCheetah ${PN}
+	make_desktop_entry ${PN} "GoldenCheetah" goldencheetah.png "Science;Sports;"
+	doicon "${FILESDIR}"/goldencheetah.png
 }
