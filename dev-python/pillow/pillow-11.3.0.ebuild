@@ -6,13 +6,16 @@ EAPI=8
 DISTUTILS_EXT=1
 # setuptools wrapper
 DISTUTILS_USE_PEP517=standalone
-PYTHON_COMPAT=( python3_{10..13} pypy3 )
+PYTHON_COMPAT=( python3_{11..14} pypy3_11 )
 PYTHON_REQ_USE='tk?,threads(+)'
 
 inherit distutils-r1 toolchain-funcs virtualx
 
 MY_PN=Pillow
 MY_P=${MY_PN}-${PV}
+
+# upstream always fetches from main
+TEST_IMAGE_COMMIT="7077675d2cda485d63de4aefe0fefbf6f655c5a0"
 
 DESCRIPTION="Python Imaging Library (fork)"
 HOMEPAGE="
@@ -23,24 +26,32 @@ HOMEPAGE="
 SRC_URI="
 	https://github.com/python-pillow/Pillow/archive/${PV}.tar.gz
 		-> ${P}.gh.tar.gz
+	test? (
+		https://github.com/python-pillow/test-images/archive/${TEST_IMAGE_COMMIT}.tar.gz
+			-> pillow-test-images-${TEST_IMAGE_COMMIT}.gh.tar.gz
+	)
 "
-S="${WORKDIR}/${MY_P}"
+S=${WORKDIR}/${MY_P}
 
 LICENSE="HPND"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux ~arm64-macos ~x64-macos"
-IUSE="examples imagequant +jpeg jpeg2k lcms raqm test tiff tk truetype webp xcb zlib"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 ~sparc x86 ~amd64-linux ~x86-linux ~arm64-macos ~x64-macos"
+IUSE="avif examples imagequant +jpeg jpeg2k lcms raqm test tiff tk truetype webp xcb zlib"
 REQUIRED_USE="test? ( jpeg jpeg2k lcms tiff truetype )"
 RESTRICT="!test? ( test )"
 
 DEPEND="
+	avif? ( media-libs/libavif:= )
 	imagequant? ( media-gfx/libimagequant:= )
 	jpeg? ( media-libs/libjpeg-turbo:= )
 	jpeg2k? ( media-libs/openjpeg:2= )
 	lcms? ( media-libs/lcms:2= )
 	raqm? ( media-libs/libraqm:= )
 	tiff? ( media-libs/tiff:=[jpeg,zlib] )
-	truetype? ( media-libs/freetype:2= )
+	truetype? (
+		media-libs/freetype:2=
+		media-libs/harfbuzz:=
+	)
 	webp? ( media-libs/libwebp:= )
 	xcb? ( x11-libs/libxcb )
 	zlib? ( sys-libs/zlib:= )
@@ -50,13 +61,12 @@ RDEPEND="
 	dev-python/olefile[${PYTHON_USEDEP}]
 "
 BDEPEND="
-	dev-python/setuptools[${PYTHON_USEDEP}]
+	>=dev-python/setuptools-77[${PYTHON_USEDEP}]
 	dev-python/wheel[${PYTHON_USEDEP}]
 	virtual/pkgconfig
 	test? (
 		dev-python/defusedxml[${PYTHON_USEDEP}]
 		dev-python/packaging[${PYTHON_USEDEP}]
-		dev-python/pytest-timeout[${PYTHON_USEDEP}]
 		|| (
 			media-gfx/imagemagick[png]
 			media-gfx/graphicsmagick[png]
@@ -64,13 +74,23 @@ BDEPEND="
 	)
 "
 
+EPYTEST_PLUGINS=( pytest-timeout )
 EPYTEST_XDIST=1
 distutils_enable_tests pytest
 
-PATCHES=(
-	# https://github.com/python-pillow/pillow/pull/7634
-	"${FILESDIR}/${PN}-10.2.0-cross.patch"
-)
+src_prepare() {
+	local PATCHES=(
+		# https://github.com/python-pillow/pillow/pull/7634
+		"${FILESDIR}/${PN}-10.2.0-cross.patch"
+	)
+
+	distutils-r1_src_prepare
+
+	if use test; then
+		mv "${WORKDIR}/test-images-${TEST_IMAGE_COMMIT}"/* \
+			Tests/images || die
+	fi
+}
 
 usepil() {
 	usex "${1}" enable disable
@@ -81,6 +101,7 @@ python_configure_all() {
 		[build_ext]
 		debug = True
 		disable_platform_guessing = True
+		$(usepil avif)_avif = True
 		$(usepil truetype)_freetype = True
 		$(usepil jpeg)_jpeg = True
 		$(usepil jpeg2k)_jpeg2000 = True
@@ -129,9 +150,9 @@ python_test() {
 	esac
 
 	"${EPYTHON}" selftest.py --installed || die "selftest failed with ${EPYTHON}"
-	local -x PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
 	# leak tests are fragile and broken under xdist
-	epytest -k "not leak" -p timeout || die "Tests failed with ${EPYTHON}"
+	# nonfatal implied by xvfb
+	nonfatal epytest -k "not leak" || die "Tests failed with ${EPYTHON}"
 }
 
 python_install() {
