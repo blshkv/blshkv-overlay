@@ -8,7 +8,7 @@ MY_P="GoldenCheetah"
 
 inherit qmake-utils desktop
 
-HASH_COMMIT="708b18ca012b65bf8b978eaef3864975e6eb1af6"
+HASH_COMMIT="3ad54d53a993920150100955040c3a9d3b0297d9"
 
 DESCRIPTION="Performance Software for Cyclists, Runners, Triathletes and Coaches"
 HOMEPAGE="https://www.goldencheetah.org/ https://github.com/GoldenCheetah/GoldenCheetah"
