@@ -9,9 +9,11 @@
     <remote-id type="github">elfmz/far2l</remote-id>
   </upstream>
   <use>
+    <flag name="archive">Enable arhive support</flag>
     <flag name="nfs">Enable nfs support</flag>
-    <flag name="ssh">Enable ssh support</flag>
-    <flag name="uchardet">Enable encoding detector library</flag>
+    <flag name="sftp">Enable sftp support</flag>
+    <flag name="colorer">Enable colorer</flag>
+    <flag name="chardet">Enable encoding detector library</flag>
     <flag name="webdav">Enable webdav support</flag>
   </use>
 </pkgmetadata>

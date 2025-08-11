@@ -20,7 +20,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm64 x86"
 
-IUSE="+uchardet X +ssh nfs +samba webdav"
+IUSE="+uchardet X +sftp nfs +samba webdav"
 
 DEPEND="
 	dev-libs/xerces-c
@@ -29,7 +29,7 @@ DEPEND="
 
 	X? ( x11-libs/wxGTK )
 	webdav? ( net-libs/neon )
-	ssh? ( net-libs/libssh )
+	sftp? ( net-libs/libssh[sftp] )
 	nfs? ( net-fs/libnfs )
 	samba? ( net-fs/samba )
 "
