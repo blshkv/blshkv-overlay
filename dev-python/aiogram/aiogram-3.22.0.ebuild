@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,7 +19,7 @@ RESTRICT="test"
 RDEPEND="
 	>=dev-python/magic-filter-1.0.12[${PYTHON_USEDEP}]
 	>=dev-python/aiohttp-3.9.0[${PYTHON_USEDEP}]
-	>=dev-python/pydantic-2.4.1[${PYTHON_USEDEP}] <dev-python/pydantic-2.11
+	>=dev-python/pydantic-2.4.1[${PYTHON_USEDEP}] <dev-python/pydantic-2.12
 	>=dev-python/aiofiles-23.2.1[${PYTHON_USEDEP}]
 	>=dev-python/certifi-2023.7.22[${PYTHON_USEDEP}]
 	>=dev-python/typing-extensions-4.7.0[${PYTHON_USEDEP}]
