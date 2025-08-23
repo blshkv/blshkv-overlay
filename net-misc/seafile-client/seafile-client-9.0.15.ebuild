@@ -35,7 +35,8 @@ BDEPEND="dev-qt/qttools:6[linguist]"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-9.0.11-select-qt6.patch"
-	"${FILESDIR}/${PN}-9.0.13-remove-qtwebengine.patch"
+	# use USE_QT_WEBKIT option instead
+	#"${FILESDIR}/${PN}-9.0.13-remove-qtwebengine.patch"
 	"${FILESDIR}/${PN}-9.0.13-QJsonValue.patch"
 	"${FILESDIR}/${PN}-9.0.13-CMakeLists.patch"
 )
