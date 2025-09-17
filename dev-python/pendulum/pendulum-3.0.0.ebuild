@@ -17,6 +17,8 @@ SLOT="0"
 #fixe GO deps
 #KEYWORDS="amd64 ~arm64 ~x86"
 
+#https://github.com/python-pendulum/pendulum/issues/919
+
 RDEPEND="
 	>=dev-python/python-dateutil-2.6[${PYTHON_USEDEP}]
 	>=dev-python/pytzdata-2020.1[${PYTHON_USEDEP}]
