@@ -1,3 +1,2 @@
-# dev-python/pytzdata
-
-#dev-ruby/will_paginate
+# Keep the obsolete encfs for a bit longer
+sys-fs/encfs
