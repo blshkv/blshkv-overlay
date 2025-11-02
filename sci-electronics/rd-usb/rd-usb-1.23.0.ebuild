@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{13..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit python-single-r1
 
 DESCRIPTION="Web GUI for RuiDeng/Riden USB testers (UM34C, UM24C, UM25C, TC66C)"

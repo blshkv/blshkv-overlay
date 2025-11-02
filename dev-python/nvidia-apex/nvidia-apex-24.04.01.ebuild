@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{13..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 
 #FIXME: sci-libs/pytorch is single package:
 #DISTUTILS_SINGLE_IMPL=1

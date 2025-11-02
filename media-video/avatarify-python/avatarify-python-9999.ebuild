@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{13..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit python-r1 git-r3
 
 DESCRIPTION="Avatars for Zoom, Skype and other video-conferencing apps"

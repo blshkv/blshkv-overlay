@@ -8,7 +8,7 @@ EAPI=8
 #DISTUTILS_USE_PEP517=scikit-build-core
 
 DISTUTILS_USE_PEP517=no
-PYTHON_COMPAT=( python3_{13..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit python-r1 python-utils-r1
 
 DESCRIPTION="Wrapper package for OpenCV python bindings."

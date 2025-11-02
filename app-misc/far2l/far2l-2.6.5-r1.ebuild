@@ -9,7 +9,7 @@ EAPI=8
 #CMAKE_VERBOSE=ON
 #CMAKE_BUILD_TYPE=Release
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 
 WX_GTK_VER="3.2-gtk3"
 
