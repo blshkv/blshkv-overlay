@@ -4,7 +4,7 @@
 EAPI=8
 
 #DISTUTILS_USE_PEP517=poetry
-PYTHON_COMPAT=( python3_{12..13} )
+PYTHON_COMPAT=( python3_{13..14} )
 inherit python-r1 git-r3
 
 DESCRIPTION="Video stabilization using Progressively Optimized Local Radiance Fields"

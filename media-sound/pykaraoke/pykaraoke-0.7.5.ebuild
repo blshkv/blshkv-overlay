@@ -4,7 +4,7 @@
 EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=( python3_{12..13} )
+PYTHON_COMPAT=( python3_{13..14} )
 inherit desktop distutils-r1
 
 DESCRIPTION="PyKaraoke is a free karaoke player"

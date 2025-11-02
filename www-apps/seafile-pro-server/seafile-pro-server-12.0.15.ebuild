@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{12..13} )
+PYTHON_COMPAT=( python3_12 )
 inherit python-single-r1
 
 MY_P="seafile-pro-server_${PV}_x86-64_Ubuntu.tar.gz"
