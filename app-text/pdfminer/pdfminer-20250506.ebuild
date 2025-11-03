@@ -10,11 +10,11 @@ inherit distutils-r1
 MY_P="${PN}_six-${PV}"
 DESCRIPTION="Python tool for extracting information from PDF documents"
 HOMEPAGE="https://pdfminersix.readthedocs.io/en/latest/"
+
 # Release tarballs lack tests
 #SRC_URI="git+https://github.com/pdfminer/pdfminer.six/archive/refs/tags/${PV}.tar.gz -> ${MY_P}.gh.tar.gz"
 #S="${WORKDIR}/${MY_P}"
-
-SRC_URI="https://github.com/pdfminer/pdfminer.six/releases/download/20250506/pdfminer_six-20250506.tar.gz"
+SRC_URI="https://github.com/pdfminer/pdfminer.six/releases/download/${PV}/pdfminer_six-${PV}.tar.gz -> ${MY_P}.gh.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="MIT"
