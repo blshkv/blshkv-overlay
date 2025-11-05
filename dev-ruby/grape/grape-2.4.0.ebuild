@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,13 +12,14 @@ HOMEPAGE="https://github.com/ruby-grape/grape"
 
 LICENSE="MIT"
 SLOT="0"
+
+#https://github.com/ruby-grape/grape-active_model_serializers/issues/94
 KEYWORDS="amd64 ~arm64 ~x86"
 
 ruby_add_rdepend "
 	dev-ruby/activesupport:*
-	dev-ruby/builder
 	>=dev-ruby/dry-types-1.1
-	=dev-ruby/mustermann-grape-1.0*
-	>=dev-ruby/rack-1.3.0
-	dev-ruby/rack-accept
+	=dev-ruby/mustermann-grape-1.1*
+	>=dev-ruby/rack-2.0.0
+	dev-ruby/zeitwerk
 "
