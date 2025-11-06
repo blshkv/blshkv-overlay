@@ -52,3 +52,4 @@ dev-ruby/jquery-rails:4
 dev-ruby/sass-rails:6.0
 dev-ruby/sprockets:4
 =dev-ruby/cgi-0.4*
+=dev-ruby/tsort-0.2*
