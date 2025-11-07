@@ -10,7 +10,6 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Cython implementation of Toolz: High performance functional utilities"
 HOMEPAGE="https://github.com/pytoolz/cytoolz"
-#SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
