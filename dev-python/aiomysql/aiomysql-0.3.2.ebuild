@@ -65,3 +65,9 @@ src_test() {
 
 	emysql --stop
 }
+
+src_prepare() {
+	rm -r ./examples
+	rm -r ./docs
+	distutils-r1_src_prepare
+}
