@@ -15,11 +15,11 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86"
 
 ruby_add_rdepend "
-	|| ( dev-ruby/activerecord:7.1 dev-ruby/activerecord:7.0 )
-	|| ( dev-ruby/actionpack:7.1 dev-ruby/actionpack:7.0 )
+	|| ( dev-ruby/activerecord:7.2 dev-ruby/activerecord:7.1 )
+	|| ( dev-ruby/actionpack:7.2 dev-ruby/actionpack:7.1 )
 	>=dev-ruby/cgi-0.3.6
-	|| ( dev-ruby/rack:3.1 dev-ruby/rack:3.0 dev-ruby/rack:2.2  )
-	|| ( dev-ruby/railties:7.1 dev-ruby/railties:7.0 )
+	|| ( dev-ruby/rack:3.2 dev-ruby/rack:3.1 dev-ruby/rack:3.0 )
+	|| ( dev-ruby/railties:7.2 dev-ruby/railties:7.1 )
 	>=dev-ruby/multi_json-1.11.2 =dev-ruby/multi_json-1*
 "
 ruby_add_bdepend "test? ( dev-ruby/sqlite3 )"

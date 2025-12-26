@@ -49,3 +49,7 @@ dev-ruby/sass-rails:6.0
 dev-ruby/sprockets:4
 =dev-ruby/cgi-0.4*
 =dev-ruby/tsort-0.2*
+
+~dev-ruby/useragent-0.16.11
+
+~dev-ruby/jbuilder-2.14.1

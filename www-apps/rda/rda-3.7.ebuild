@@ -17,8 +17,8 @@ IUSE="mysql mariadb"
 
 RDEPEND="${RUBY_DEPS}
 	dev-ruby/mysql2[mysql?,mariadb?]
-	dev-ruby/rails:7.1
-	|| ( dev-ruby/activerecord:7.1 dev-ruby/activerecord:7.0 )
+	dev-ruby/rails:7.2
+	|| ( dev-ruby/activerecord:7.2 dev-ruby/activerecord:7.1 )
 	dev-ruby/activerecord-session_store
 	dev-ruby/bootstrap
 	dev-ruby/ckeditor_rails
