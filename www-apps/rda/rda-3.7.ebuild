@@ -26,7 +26,7 @@ RDEPEND="${RUBY_DEPS}
 	dev-ruby/jquery-rails:4
 	dev-ruby/jquery-ui-rails:7
 	dev-ruby/image_processing
-	media-gfx/imagemagick[png,jpeg]
+	media-gfx/imagemagick[png,jpeg,webp]
 	dev-ruby/rake
 	dev-ruby/sablon
 	dev-ruby/similar_text
