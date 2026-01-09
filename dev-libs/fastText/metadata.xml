@@ -9,4 +9,9 @@
 		<remote-id type="github">facebookresearch/fastText</remote-id>
 		<remote-id type="pypi">fasttext</remote-id>
 	</upstream>
+	<use>
+		<flag name="lid176">Language identification model, faster and slightly more accurate</flag>
+		<flag name="lid176ftz">Language identification model, compressed</flag>
+	</use>
+
 </pkgmetadata>

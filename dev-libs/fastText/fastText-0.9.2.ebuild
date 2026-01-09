@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,12 +11,14 @@ inherit cmake distutils-r1 edo
 
 DESCRIPTION="Library for fast text representation and classification"
 HOMEPAGE="https://fasttext.cc https://github.com/facebookresearch/fastText"
-SRC_URI="https://github.com/facebookresearch/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+SRC_URI="https://github.com/facebookresearch/${PN}/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz
+	lid176? ( https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin )
+	lid176ftz? ( https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz )"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="python"
+IUSE="python +lid176 lid176ftz"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="
@@ -73,6 +75,10 @@ python_test() {
 src_install() {
 	cmake_src_install
 	use python && distutils-r1_src_install
+
+	insinto /usr/share/dict
+	use lid176 && doins "${DISTDIR}"/lid.176.bin
+	use lid176ftz && doins "${DISTDIR}"/lid.176.ftz
 
 	find "${ED}" -name '*.a' -delete || die
 }
