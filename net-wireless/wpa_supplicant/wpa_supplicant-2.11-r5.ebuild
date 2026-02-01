@@ -13,7 +13,7 @@ if [ "${PV}" = "9999" ]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://w1.fi/hostap.git"
 else
-	KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ppc64 ~riscv ~sparc x86"
+#	KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ppc64 ~riscv ~sparc x86"
 	SRC_URI="https://w1.fi/releases/${P}.tar.gz"
 fi
 
@@ -121,6 +121,9 @@ src_prepare() {
 
 	# bug (937452)
 	eapply "${FILESDIR}/${PN}-2.11-Revert-Mark-authorization-completed-on-driver-indica.patch"
+
+	# bug (956555)
+	eapply "${FILESDIR}/${PN}-2.11-broadcom-wl-scanning.patch"
 
 	# bug (640492)
 	sed -i 's#-Werror ##' wpa_supplicant/Makefile || die
@@ -324,6 +327,13 @@ src_configure() {
 
 		# Enabling VHT support (802.11ac)
 		Kconfig_style_config IEEE80211AC
+
+		# blshkv
+		# https://wizardfi.com/wifi7/2024/09/13/three-link-emlsr-mld-mlo-be200-hpe-aruba-networking-ap-735.html
+		Kconfig_style_config IEEE80211BE
+		Kconfig_style_config IEEE80211AX
+		# WPA3
+		#IEEE 802.11i
 	fi
 
 	# Enable mitigation against certain attacks against TKIP
@@ -342,12 +352,6 @@ src_configure() {
 		eqmake6 wpa_gui.pro
 		popd > /dev/null || die
 	fi
-
-	# blshkv
-	# https://wizardfi.com/wifi7/2024/09/13/three-link-emlsr-mld-mlo-be200-hpe-aruba-networking-ap-735.html
-	Kconfig_style_config IEEE80211BE
-	Kconfig_style_config IEEE80211AX
-
 }
 
 src_compile() {
