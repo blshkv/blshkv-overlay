@@ -330,7 +330,9 @@ src_configure() {
 
 		# blshkv
 		# https://wizardfi.com/wifi7/2024/09/13/three-link-emlsr-mld-mlo-be200-hpe-aruba-networking-ap-735.html
+		#IEEE 802.11be EHT support (mainly for AP mode)
 		Kconfig_style_config IEEE80211BE
+		# IEEE 802.11ax HE support (mainly for AP mode)
 		Kconfig_style_config IEEE80211AX
 		# WPA3
 		#IEEE 802.11i
