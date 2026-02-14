@@ -25,7 +25,7 @@ RDEPEND="
 	>=dev-python/typing-extensions-4.7.0[${PYTHON_USEDEP}]
 
 	fast? (
-		>=dev-python/uvloop-0.17.0[${PYTHON_USEDEP}]
+		>=dev-python/uvloop-0.21.0[${PYTHON_USEDEP}]
 		>=dev-python/aiodns-3.0.0[${PYTHON_USEDEP}]
 	)
 	i18n? ( >=dev-python/babel-2.13.0[${PYTHON_USEDEP}] )
