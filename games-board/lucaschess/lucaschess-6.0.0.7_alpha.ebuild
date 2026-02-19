@@ -1,25 +1,23 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 #DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{12..14} )
+MY_PV=${PV/_alpha/alpha}
 
 #inherit distutils-r1
 inherit python-r1
 
-HASH_COMMIT=5076a09173224ce088660260c772e020b93cf3a6
-
 DESCRIPTION="Lucas Chess R Version 2"
 HOMEPAGE="https://github.com/lukasmonk/lucaschessR6"
-SRC_URI="https://github.com/lukasmonk/lucaschessR6/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}"/${PN}R6-${HASH_COMMIT}
+SRC_URI="https://github.com/lukasmonk/lucaschessR6/archive/refs/tags/R${MY_PV}.tar.gz -> ${P}.tar.gz"
+S="${WORKDIR}"/${PN}R6-R${MY_PV}
 
 LICENSE="GPL-3"
 SLOT="0"
-#This version is older then 6.0.0.x-alpha
-#KEYWORDS="amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 ~x86"
 
 RDEPEND="${PYTHON_DEPS}
 	>=dev-python/chardet-3.0.4[${PYTHON_USEDEP}]
