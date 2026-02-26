@@ -3,6 +3,8 @@
 
 EAPI=8
 
+inherit java-pkg-2
+
 MY_P="LanguageTool-${PV}"
 
 DESCRIPTION="Local server for LanguageTool"
@@ -14,7 +16,9 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="amd64"
 
-RDEPEND="dev-libs/fastText"
+#java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
+RDEPEND="dev-libs/fastText
+	>=virtual/jre-25:*"
 DEPEND="${RDEPEND}"
 
 src_install() {
