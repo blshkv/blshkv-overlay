@@ -5,7 +5,7 @@ EAPI=8
 
 #inherit desktop
 
-MY_PN=${PN/-client-bin/_client}
+MY_PN="${PN/-client-bin/_client}"
 MY_P=${MY_PN}-v${PV}-linux-x86_64
 
 DESCRIPTION="Command-line client for TrustTunnel"
@@ -17,16 +17,14 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64"
 
-#RDEPEND=""
-
 # https://github.com/TrustTunnel/TrustTunnelClient/blob/master/DEVELOPMENT.md#building
 
 src_install() {
 	insinto /usr/share/${MY_PN}
 	doins -r ${MY_PN}
-	#fperms +x /usr/share/${MY_PN}/{trusttunnel_client,setup_wizard}
-	fperms +x /usr/share/${MY_PN}/${MY_PN}
+	doins -r "${FILESDIR}"/trusttunnel_client.toml
 
+	fperms +x /usr/share/${MY_PN}/${MY_PN}
 	dosym -r /usr/share/${MY_PN}/${MY_PN} /usr/bin/trusttunnel
 
 #	doicon ${FILESDIR}/trusttunnel.png
