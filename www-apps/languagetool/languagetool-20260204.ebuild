@@ -21,8 +21,7 @@ KEYWORDS="~amd64"
 RDEPEND="dev-libs/fastText
 	>=virtual/jre-25:*"
 DEPEND="${RDEPEND}"
-
-RDEPEND=""
+BDEPEND="app-arch/unzip"
 
 src_install() {
 	dodir /usr/share/${PN}
