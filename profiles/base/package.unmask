@@ -1,2 +1,5 @@
 # Keep the obsolete encfs for a bit longer
 sys-fs/encfs
+
+# Keep it a bit longer
+www-servers/nginx-unit
