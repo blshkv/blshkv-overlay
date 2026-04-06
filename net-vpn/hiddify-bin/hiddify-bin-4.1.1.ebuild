@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -26,6 +26,7 @@ src_install() {
 	fperms +x /usr/share/hiddify/{hiddify,HiddifyCli}
 
 	dosym -r /usr/share/${MY_PN}/hiddify /usr/bin/hiddify
+	dosym -r /usr/share/${MY_PN}/HiddifyCli /usr/bin/hiddifyCli
 
 	doicon usr/share/icons/hicolor/128x128/apps/hiddify.png
 	make_desktop_entry hiddify "Hiddify" /usr/share/pixmaps/hiddify.png "Network;System"
