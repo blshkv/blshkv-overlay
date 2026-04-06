@@ -1,15 +1,15 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{12..13} )
+PYTHON_COMPAT=( python3_{12..14} )
 
 inherit flag-o-matic python-single-r1 systemd toolchain-funcs
 
 MY_P="unit-${PV}"
 MY_USE="perl python ruby"
-MY_USE_PHP="php8-3"
+MY_USE_PHP="php8-3 php8-4"
 
 DESCRIPTION="Dynamic web and application server"
 HOMEPAGE="https://unit.nginx.org"
@@ -18,7 +18,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 IUSE="${MY_USE} ${MY_USE_PHP} perl ssl"
 
 REQUIRED_USE="|| ( ${IUSE} )
@@ -26,6 +26,7 @@ REQUIRED_USE="|| ( ${IUSE} )
 
 DEPEND="perl? ( dev-lang/perl:= )
 	php8-3? ( dev-lang/php:8.3[embed] )
+	php8-4? ( dev-lang/php:8.4[embed] )
 	python? ( ${PYTHON_DEPS} )
 	ruby? (
 		dev-lang/ruby:=
@@ -85,6 +86,10 @@ src_configure() {
 				--lib-path=${php_slot}/$(get_libdir) || die "Module configuration failed: ${flag}"
 		fi
 	done
+}
+
+src_test() {
+	use python && epytest '-opython_files=test_python*.py'
 }
 
 src_install() {
