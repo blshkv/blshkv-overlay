@@ -42,6 +42,8 @@ RDEPEND="${DEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-ruby34.patch
+	#https://bugs.ruby-lang.org/issues/21659#change-115064
+	"${FILESDIR}"/${PN}-ruby3310.patch
 )
 
 pkg_setup() {

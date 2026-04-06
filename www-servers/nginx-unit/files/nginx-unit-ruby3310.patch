@@ -1,0 +1,10 @@
+--- a/auto/modules/ruby.orig	2025-09-12 00:10:51.000000000 +0800
++++ b/auto/modules/ruby	2026-04-06 17:18:59.400149336 +0800
+@@ -98,6 +98,7 @@
+         fi
+     fi
+ 
++    NXT_RUBY_CFLAGS="$NXT_RUBY_CFLAGS -Wno-missing-field-initializers"
+     nxt_feature="Ruby library"
+     nxt_feature_name=""
+     nxt_feature_run=value

@@ -41,6 +41,11 @@ RDEPEND="${DEPEND}
 	acct-user/nginx-unit
 	acct-group/nginx-unit"
 
+PATCHES=(
+	#https://bugs.ruby-lang.org/issues/21659#change-115064
+	"${FILESDIR}"/${PN}-ruby3310.patch
+)
+
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
@@ -69,7 +74,7 @@ src_configure() {
 	./configure ${opt[@]} --ld-opt="${LDFLAGS}" || die "Core configuration failed"
 
 	# Modules require position-independent code
-	append-cflags $(test-flags-CC -fPIC -Wno-incompatible-pointer-types)
+	append-cflags $(test-flags-CC -fPIC -Wno-incompatible-pointer-types -Wno-missing-field-initializers)
 
 	for flag in ${MY_USE} ; do
 		if use ${flag} ; then
