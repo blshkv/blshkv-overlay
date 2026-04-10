@@ -25,10 +25,12 @@ RDEPEND="${PYTHON_DEPS}
 	=dev-python/django-4.2*[${PYTHON_USEDEP}]
 	>=dev-python/pillow-10.0.0[${PYTHON_USEDEP}]
 	dev-python/pylibmc[${PYTHON_USEDEP}]
+	dev-python/gevent[${PYTHON_USEDEP}]
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
 
 	dev-python/jinja2[${PYTHON_USEDEP}]
 	=dev-python/sqlalchemy-2*[${PYTHON_USEDEP}]
+	dev-python/pillow-heif[${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
