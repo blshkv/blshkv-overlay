@@ -14,7 +14,7 @@ SRC_URI="https://plus.seafile.com/d/6e5297246c/files/?p=%2Fpro%2F${MY_P}&dl=1 ->
 
 LICENSE="seafile"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="fuse +ldap mariadb mysql psd saml"
 
 # https://manual.seafile.com/12.0/changelog/changelog-for-seafile-professional-server/
