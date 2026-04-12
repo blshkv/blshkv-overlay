@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,15 +20,16 @@ IUSE="fuse +ldap mariadb mysql psd saml"
 # https://manual.seafile.com/12.0/changelog/changelog-for-seafile-professional-server/
 
 RDEPEND="${PYTHON_DEPS}
-	=app-misc/elasticsearch-8*
 	$(python_gen_cond_dep '
-	=dev-python/django-4.2*[${PYTHON_USEDEP}]
-	>=dev-python/pillow-10.0.0[${PYTHON_USEDEP}]
+	=dev-python/django-5.2*[${PYTHON_USEDEP}]
+	>=dev-python/pillow-11.3.0[${PYTHON_USEDEP}]
 	dev-python/pylibmc[${PYTHON_USEDEP}]
 	dev-python/django-simple-captcha[${PYTHON_USEDEP}]
 
 	dev-python/jinja2[${PYTHON_USEDEP}]
 	=dev-python/sqlalchemy-2*[${PYTHON_USEDEP}]
+	dev-python/pillow-heif[${PYTHON_USEDEP}]
+	dev-python/pymysql[${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
 	dev-python/ldap3[${PYTHON_USEDEP}]
