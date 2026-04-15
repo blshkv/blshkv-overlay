@@ -47,8 +47,7 @@ RDEPEND="${PYTHON_DEPS}
 	mysql? ( $(python_gen_cond_dep ' dev-python/mysqlclient[${PYTHON_USEDEP}]') )
 	saml?  ( $(python_gen_cond_dep ' dev-python/djangosaml2[${PYTHON_USEDEP}]') )
 	sys-libs/libselinux
-	dev-libs/nss
-	virtual/jre:*"
+	dev-libs/nss"
 DEPEND="${RDEPEND}"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
