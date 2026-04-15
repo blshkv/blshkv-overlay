@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,7 +8,7 @@ MY_P="GoldenCheetah"
 
 inherit qmake-utils desktop
 
-HASH_COMMIT="3ad54d53a993920150100955040c3a9d3b0297d9"
+HASH_COMMIT="ff4f46ed917be46423676315b1f08ff28792881b"
 
 DESCRIPTION="Performance Software for Cyclists, Runners, Triathletes and Coaches"
 HOMEPAGE="https://www.goldencheetah.org/ https://github.com/GoldenCheetah/GoldenCheetah"
