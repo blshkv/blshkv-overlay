@@ -1,4 +1,4 @@
-# Copyright 1999-2026 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,8 +9,12 @@ MY_P="LanguageTool-${PV}"
 
 DESCRIPTION="Local server for LanguageTool"
 HOMEPAGE="https://dev.languagetool.org/http-server.html"
-SRC_URI="https://languagetool.org/download/LanguageTool-${PV}.zip"
-S="${WORKDIR}/${MY_P}"
+SRC_URI="https://internal1.languagetool.org/snapshots/LanguageTool-${PV}-snapshot.zip"
+
+# https://dev.languagetool.org/roadmap
+# In March 2025, LanguageTool has switched to a snapshot-based release model
+# There will be no new ZIP files with a fixed version number X.Y anymore
+S="${WORKDIR}/LanguageTool-6.8-SNAPSHOT"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -30,6 +34,7 @@ src_install() {
 	insinto /usr/share/${PN}
 	doins "${FILESDIR}"/server.properties
 
+#	java-pkg_dolauncher "${PN}-server" --java_args "java -Xmx512M -cp languagetool-server.jar org.languagetool.server.HTTPServer --config server.properties --port 8081 --allow-origin"
 	newbin - languagetool-server <<-EOF
 #!/bin/sh
 

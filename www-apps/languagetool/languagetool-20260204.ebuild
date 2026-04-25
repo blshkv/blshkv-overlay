@@ -15,7 +15,7 @@ S="${WORKDIR}/LanguageTool-6.8-SNAPSHOT"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 #java-pkg-2 sets java based on RDEPEND so the java slot in rdepend is used to build
 RDEPEND="dev-libs/fastText
