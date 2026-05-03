@@ -1,0 +1,8 @@
+--- a/turbo-rails.gemspec
++++ b/turbo-rails.gemspec
+@@ -1,4 +1,4 @@
+-require_relative "lib/turbo/version"
++require "./lib/turbo/version"
+
+ Gem::Specification.new do |s|
+   s.name = "turbo-rails"
