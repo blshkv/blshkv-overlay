@@ -35,8 +35,8 @@ RDEPEND="${RUBY_DEPS}
 	dev-ruby/rack-cors
 	dev-ruby/grape-active_model_serializers
 	dev-ruby/sass-rails:*
-	dev-ruby/turbo-rails
-	dev-ruby/stimulus-rails
 	dev-ruby/importmap-rails:*
+	dev-ruby/stimulus-rails
+	dev-ruby/turbo-rails
+	dev-ruby/ransack
 	"
-#	dev-ruby/coffee-rails
