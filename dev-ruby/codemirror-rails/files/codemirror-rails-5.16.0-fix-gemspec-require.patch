@@ -1,0 +1,13 @@
+--- a/codemirror-rails.gemspec
++++ b/codemirror-rails.gemspec
+@@ -1,4 +1,4 @@
+-require File.expand_path('../lib/codemirror/rails/version', __FILE__)
++require './lib/codemirror/rails/version'
+
+ Gem::Specification.new do |s|
+   s.name        = "codemirror-rails"
+@@ -13,4 +13,4 @@
+   s.files = Dir.glob('{doc,lib,vendor}/**/*') + %w(LICENSE README.md)
+
+-  s.add_runtime_dependency 'railties', '>= 3.0', '< 6.0'
++  s.add_runtime_dependency 'railties', '>= 3.0', '< 8.1'
