@@ -1,9 +1,9 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-USE_RUBY="ruby32 ruby33"
+USE_RUBY="ruby33 ruby34"
 
 inherit ruby-single
 
@@ -35,5 +35,9 @@ RDEPEND="${RUBY_DEPS}
 	dev-ruby/rack-cors
 	dev-ruby/grape-active_model_serializers
 	dev-ruby/sass-rails:*
+	dev-ruby/importmap-rails:*
+	dev-ruby/stimulus-rails
+	dev-ruby/turbo-rails
+	dev-ruby/codemirror-rails
+	dev-ruby/ransack
 	"
-#	dev-ruby/coffee-rails
