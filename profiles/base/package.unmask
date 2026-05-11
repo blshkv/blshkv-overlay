@@ -3,3 +3,6 @@ sys-fs/encfs
 
 # Keep it a bit longer
 www-servers/nginx-unit
+
+~dev-python/django-4.2.30
+#dev-python/django
