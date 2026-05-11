@@ -59,6 +59,7 @@ src_prepare() {
 
 pkg_postinst() {
 	elog "follow the official documentation:"
+	elog "https://manual.seafile.com/13.0/setup_binary/outline/"
 	elog "https://manual.seafile.com/13.0/setup/setup_pro_by_docker/"
 	elog "https://manual.seafile.com/13.0/upgrade/upgrade_notes_for_13.0.x/"
 }
