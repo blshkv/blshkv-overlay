@@ -23,12 +23,13 @@ DEPEND="
 	>=dev-libs/libev-4.31:=
 	dev-libs/libuv:=
 	>=net-dns/c-ares-1.12:=
-	>=dev-python/greenlet-3[${PYTHON_USEDEP}]
+	>=dev-python/greenlet-3.2.2[${PYTHON_USEDEP}]
 	>=dev-python/cython-3.0.8[${PYTHON_USEDEP}]
-	>=dev-python/cffi-1.12.3[${PYTHON_USEDEP}]
+	>=dev-python/cffi-1.17.1[${PYTHON_USEDEP}]
 	dev-python/zope-event[${PYTHON_USEDEP}]
 	dev-python/zope-interface[${PYTHON_USEDEP}]
 "
+BDEPEND="dev-python/cython[${PYTHON_USEDEP}]"
 
 distutils_enable_sphinx doc
 
