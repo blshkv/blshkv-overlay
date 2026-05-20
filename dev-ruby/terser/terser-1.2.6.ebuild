@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby32 ruby33"
+USE_RUBY="ruby32 ruby33 ruby34 ruby40"
 
 # There are specs but building the gem involves handling git submodules so we skip that for now.
 RUBY_FAKEGEM_RECIPE_TEST="none"

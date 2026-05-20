@@ -5,7 +5,6 @@ dev-ruby/activerecord-session_store
 dev-ruby/ckeditor
 dev-ruby/ckeditor_rails
 dev-ruby/orm_adapter
-dev-ruby/bootstrap
 dev-ruby/bootstrap-select-rails
 
 dev-ruby/coffee-rails:5.0

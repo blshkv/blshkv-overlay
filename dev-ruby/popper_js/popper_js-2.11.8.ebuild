@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby32 ruby33"
+USE_RUBY="ruby32 ruby33 ruby34 ruby40"
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 RUBY_FAKEGEM_RECIPE_TEST="none"
 RUBY_FAKEGEM_EXTRAINSTALL="assets"
@@ -12,7 +12,7 @@ RUBY_FAKEGEM_BINWRAP=""
 inherit ruby-fakegem
 
 DESCRIPTION="Popper.js assets as a Ruby gem"
-HOMEPAGE="https://github.com/glebm/popper_js-rubygem"
+HOMEPAGE="https://rubygems.org/gems/popper_js https://github.com/glebm/popper_js-rubygem"
 LICENSE="MIT"
 
 KEYWORDS="amd64 ~arm64 x86"

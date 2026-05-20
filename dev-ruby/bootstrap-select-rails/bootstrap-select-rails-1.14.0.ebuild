@@ -8,7 +8,7 @@ EAPI=8
 
 HASH_COMMIT="d4fdc13c22759ca9acec028d72f35e133df6d932"
 
-USE_RUBY="ruby32 ruby33"
+USE_RUBY="ruby32 ruby33 ruby34 ruby40"
 #RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 # Requires capybara + poltergeist
 #RUBY_FAKEGEM_RECIPE_TEST="none"

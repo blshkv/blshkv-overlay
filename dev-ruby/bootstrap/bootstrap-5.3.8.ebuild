@@ -3,7 +3,7 @@
 
 EAPI=8
 
-USE_RUBY="ruby32 ruby33"
+USE_RUBY="ruby32 ruby33 ruby34 ruby40"
 RUBY_FAKEGEM_RECIPE_DOC="rdoc"
 # Requires capybara + poltergeist
 RUBY_FAKEGEM_RECIPE_TEST="none"
@@ -17,7 +17,7 @@ HOMEPAGE="https://github.com/twbs/bootstrap-rubygem"
 LICENSE="MIT"
 SLOT="5"
 
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="amd64 ~arm64 x86"
 
 ruby_add_rdepend "
 	>=dev-ruby/popper_js-2.11.8:2
