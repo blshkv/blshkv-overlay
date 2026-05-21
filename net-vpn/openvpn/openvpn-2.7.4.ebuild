@@ -49,7 +49,7 @@ COMMON_DEPEND="
 	pam? ( sys-libs/pam )
 	pkcs11? ( >=dev-libs/pkcs11-helper-1.11 )
 	systemd? ( sys-apps/systemd )
-	dco? ( >=dev-libs/libnl-3.4:= )
+	dco? ( >=net-vpn/ovpn-dco-0.2 >=dev-libs/libnl-3.2.29:= )
 	sys-libs/libcap-ng:=
 "
 
