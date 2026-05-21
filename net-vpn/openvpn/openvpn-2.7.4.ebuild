@@ -49,7 +49,7 @@ COMMON_DEPEND="
 	pam? ( sys-libs/pam )
 	pkcs11? ( >=dev-libs/pkcs11-helper-1.11 )
 	systemd? ( sys-apps/systemd )
-	dco? ( >=net-vpn/ovpn-dco-0.2 >=dev-libs/libnl-3.2.29:= )
+	dco? ( >=dev-libs/libnl-3.2.29:= )
 	sys-libs/libcap-ng:=
 "
 
@@ -79,6 +79,11 @@ PATCHES=(
 )
 
 pkg_setup() {
+	#Kernel 6.16+ / OpenVPN 2.7.0+
+	if use dco; kernel_is -lt 6 16; then
+		ewarn "The kernel is older then 2.16"
+		ewarn "Please install net-vpn/ovpn-dco package manually"
+	fi
 	local CONFIG_CHECK="~TUN"
 	use dco && CONFIG_CHECK+=" ~OVPN"
 	linux-info_pkg_setup
@@ -204,10 +209,10 @@ pkg_postinst() {
 		elog "To create more VPNs, simply create a new .conf file for it and"
 		elog "then create a symlink to the openvpn init script from a link called"
 		elog "openvpn.newconfname - like so"
-		elog "   cd /etc/openvpn"
-		elog "   ${EDITOR##*/} foo.conf"
-		elog "   cd /etc/init.d"
-		elog "   ln -s openvpn openvpn.foo"
+		elog "	 cd /etc/openvpn"
+		elog "	 ${EDITOR##*/} foo.conf"
+		elog "	 cd /etc/init.d"
+		elog "	 ln -s openvpn openvpn.foo"
 		elog
 		elog "You can then treat openvpn.foo as any other service, so you can"
 		elog "stop one vpn and start another if you need to."
@@ -224,12 +229,5 @@ pkg_postinst() {
 	if use plugins ; then
 		einfo
 		einfo "plugins have been installed into /usr/$(get_libdir)/${PN}/plugins"
-	fi
-
-	if use dco ; then
-		elog
-		elog "DCO (Data Channel Offload) support requires the ovpn kernel module."
-		elog "This module is available in upstream Linux kernels (future releases)"
-		elog "or via the ovpn-backports project for current kernels."
 	fi
 }
