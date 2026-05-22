@@ -54,3 +54,5 @@ dev-ruby/sprockets:4
 ~dev-ruby/jbuilder-2.14.1
 
 dev-ruby/importmap-rails:2
+
+dev-ruby/action_text-trix
