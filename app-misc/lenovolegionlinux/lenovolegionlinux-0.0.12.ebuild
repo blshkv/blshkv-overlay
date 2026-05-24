@@ -3,19 +3,20 @@
 
 EAPI=8
 
-M_PN=LenovoLegionLinux
-
+MY_PN=LenovoLegionLinux
+MY_PV="${PV}-prerelease"
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=(python3_{12..14})
 
 inherit linux-mod-r1 distutils-r1 systemd optfeature
 
 if [[ ${PV} == "9999" ]]; then
-	EGIT_REPO_URI="https://github.com/johnfanv2/${M_PN}.git"
+	EGIT_REPO_URI="https://github.com/johnfanv2/${MY_PN}.git"
 	inherit git-r3
 else
-	SRC_URI="https://github.com/johnfanv2/${M_PN}/archive/refs/tags/v${PV}.tar.gz"
-	KEYWORDS="~amd64"
+	SRC_URI="https://github.com/johnfanv2/${MY_PN}/archive/refs/tags/v${MY_PV}.tar.gz"
+	#fails to compile with kernel 6.16
+#	KEYWORDS="~amd64"
 fi
 
 DESCRIPTION="Lenovo Legion Linux kernel module"
@@ -45,7 +46,10 @@ DEPEND="${RDEPEND}"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="+gui downgrade-nvidia elogind"
+
 MODULES_KERNEL_MIN=5.10
+
+S="${WORKDIR}/${MY_PN}-${MY_PV}"
 
 src_compile() {
 	local modlist=(
@@ -59,11 +63,11 @@ src_compile() {
 			sed -i "s/version = _VERSION/version = 9999/g" "${WORKDIR}/${P}/python/legion_linux/setup.cfg"
 		else
 			#fix python package version
-			sed -i "s/version = _VERSION/version = ${PV}/g" "${WORKDIR}/${P}/python/legion_linux/setup.cfg"
+			sed -i "s/version = _VERSION/version = ${PV}/g" "python/legion_linux/setup.cfg"
 		fi
 		#Define build dir (fix sandboxed)
-		cd "${WORKDIR}/${P}/python/legion_linux" || die
-		distutils-r1_src_compile --build-dir "${WORKDIR}/${P}/python/legion_linux/build"
+		cd "python/legion_linux" || die
+		distutils-r1_src_compile --build-dir "python/legion_linux/build"
 		cd "legion_linux/extra/service/legiond" || die
 		emake
 	fi
