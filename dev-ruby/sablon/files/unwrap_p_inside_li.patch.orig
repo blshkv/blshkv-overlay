@@ -1,0 +1,59 @@
+From 823bcba23dcad4ac0180f1f2f109f5f6913ca954 Mon Sep 17 00:00:00 2001
+From: Anton Bolshakov <blshkv@gmail.com>
+Date: Sun, 24 May 2026 09:10:07 +0800
+Subject: [PATCH] Unwrap <p> inside <li> to prevent nested w:p in OOXML
+
+Editors such as Trix wrap list item text in <p> tags, producing
+<li><p>text</p></li>. Since <li> already maps to a w:p paragraph
+node, nesting <p> (also w:p) inside it creates invalid OOXML that
+Word silently drops, losing the list item content entirely.
+
+Fix by unwrapping <p> elements that are direct children of <li> in
+process_child_nodes before AST conversion, replacing each <p> with
+its own children.
+---
+ lib/sablon/html/ast.rb | 10 +++++++++-
+ test/html/ast_test.rb  |  8 ++++++++
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/lib/sablon/html/ast.rb b/lib/sablon/html/ast.rb
+index 39182610..784d27e9 100644
+--- a/lib/sablon/html/ast.rb
++++ b/lib/sablon/html/ast.rb
+@@ -256,8 +256,16 @@ def merge_attributes(child, parent_attributes)
+       end
+ 
+       # moves any list tags that are a child of a list item tag up one level
+-      # so they become a sibling instead of a child
++      # so they become a sibling instead of a child, and unwraps <p> tags
++      # directly inside <li> to prevent nested w:p elements in OOXML
+       def process_child_nodes(node)
++        # Unwrap <p> directly inside <li>: editors such as Trix wrap list item
++        # text in <p>, but <li> already maps to w:p so nesting them produces
++        # invalid OOXML that Word silently drops.
++        node.xpath("./li/p").each do |p|
++          p.replace(p.children)
++        end
++
+         node.xpath("./li/#{@list_tag}").each do |list|
+           # transfer attributes from parent now because the list tag will
+           # no longer be a child and won't inheirit them as usual
+diff --git a/test/html/ast_test.rb b/test/html/ast_test.rb
+index b1ea842a..3a643781 100644
+--- a/test/html/ast_test.rb
++++ b/test/html/ast_test.rb
+@@ -115,6 +115,14 @@ def test_keep_nested_list_order
+     assert_equal %w[0 1 2 1 0 1 2], get_numpr_prop_from_ast(ast, :ilvl)
+   end
+ 
++  def test_p_inside_li_is_unwrapped
++    # editors like Trix wrap <li> text in <p>; the <p> must be unwrapped
++    # because <li> already maps to w:p and OOXML forbids nested w:p elements
++    input = '<ul><li><p>item one</p></li><li><p>item two</p></li></ul>'
++    ast = @converter.processed_ast(input)
++    assert_equal '<Root: [<List: [<Paragraph{ListBullet}: [<Run{}: item one>]>, <Paragraph{ListBullet}: [<Run{}: item two>]>]>]>', ast.inspect
++  end
++
+   def test_table_tag
+     input='<table></table>'
+     ast = @converter.processed_ast(input)

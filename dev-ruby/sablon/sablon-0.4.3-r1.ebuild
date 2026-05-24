@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,3 +19,8 @@ ruby_add_rdepend "
 	>=dev-ruby/nokogiri-1.8.5
 	>=dev-ruby/rubyzip-1.3.1
 "
+
+all_ruby_prepare() {
+	eapply "${FILESDIR}/sablon_nested_list_fix.patch"
+	eapply "${FILESDIR}/unwrap_p_inside_li.patch"
+}

@@ -1,0 +1,57 @@
+diff --git a/lib/sablon/configuration/configuration.rb b/lib/sablon/configuration/configuration.rb
+index d0a4c1f..305efb7 100644
+--- a/lib/sablon/configuration/configuration.rb
++++ b/lib/sablon/configuration/configuration.rb
+@@ -69,8 +69,8 @@ module Sablon
+         h4: { type: :block, ast_class: :paragraph, properties: { pStyle: 'Heading4' }, allowed_children: :_inline },
+         h5: { type: :block, ast_class: :paragraph, properties: { pStyle: 'Heading5' }, allowed_children: :_inline },
+         h6: { type: :block, ast_class: :paragraph, properties: { pStyle: 'Heading6' }, allowed_children: :_inline },
+-        ol: { type: :block, ast_class: :list, properties: { pStyle: 'ListNumber' }, allowed_children: %i[ol li] },
+-        ul: { type: :block, ast_class: :list, properties: { pStyle: 'ListBullet' }, allowed_children: %i[ul li] },
++        ol: { type: :block, ast_class: :list, properties: { pStyle: 'ListNumber' }, allowed_children: %i[ol ul li] },
++        ul: { type: :block, ast_class: :list, properties: { pStyle: 'ListBullet' }, allowed_children: %i[ul ol li] },
+         li: { type: :block, ast_class: :list_paragraph },
+ 
+         # inline style tags for tables
+diff --git a/lib/sablon/html/ast.rb b/lib/sablon/html/ast.rb
+index 3918261..5df9e2f 100644
+--- a/lib/sablon/html/ast.rb
++++ b/lib/sablon/html/ast.rb
+@@ -258,7 +258,7 @@ module Sablon
+       # moves any list tags that are a child of a list item tag up one level
+       # so they become a sibling instead of a child
+       def process_child_nodes(node)
+-        node.xpath("./li/#{@list_tag}").each do |list|
++        node.xpath("./li/ul | ./li/ol").each do |list|
+           # transfer attributes from parent now because the list tag will
+           # no longer be a child and won't inheirit them as usual
+           transfer_node_attributes(list.children, list.parent.attributes)
+diff --git a/test/html/ast_test.rb b/test/html/ast_test.rb
+index b1ea842..95e4003 100644
+--- a/test/html/ast_test.rb
++++ b/test/html/ast_test.rb
+@@ -115,6 +115,24 @@ class HTMLConverterASTTest < Sablon::TestCase
+     assert_equal %w[0 1 2 1 0 1 2], get_numpr_prop_from_ast(ast, :ilvl)
+   end
+ 
++  def test_mixed_nested_list_ol_containing_ul
++    # an unordered list nested inside an ordered list should produce
++    # two visible list items, not just the outer item
++    input = '<ol><li>ordered1<ul><li>unordered2</li></ul></li></ol>'
++    ast = @converter.processed_ast(input)
++    assert_equal 2, get_numpr_prop_from_ast(ast, :ilvl).length
++    assert_equal %w[0 0], get_numpr_prop_from_ast(ast, :ilvl)
++  end
++
++  def test_mixed_nested_list_ul_containing_ol
++    # an ordered list nested inside an unordered list should produce
++    # two visible list items, not just the outer item
++    input = '<ul><li>bullet1<ol><li>ordered2</li></ol></li></ul>'
++    ast = @converter.processed_ast(input)
++    assert_equal 2, get_numpr_prop_from_ast(ast, :ilvl).length
++    assert_equal %w[0 0], get_numpr_prop_from_ast(ast, :ilvl)
++  end
++
+   def test_table_tag
+     input='<table></table>'
+     ast = @converter.processed_ast(input)
