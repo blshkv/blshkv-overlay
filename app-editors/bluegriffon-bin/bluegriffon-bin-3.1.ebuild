@@ -8,7 +8,7 @@ MY_PN="bluegriffon"
 DESCRIPTION="The next-generation Web Editor based on the rendering engine of Firefox"
 HOMEPAGE="http://www.bluegriffon.org/"
 SRC_URI="
-        amd64? ( http://bluegriffon.org/freshmeat/${PV}/${MY_PN}-${PV}.Ubuntu15.04.x86_64.tar.bz2 )
+        amd64? ( http://bluegriffon.org/freshmeat/${PV}/${MY_PN}-${PV}.Ubuntu18.04-x86_64.tar.bz2  )
 	"
 #http://bluegriffon.org/freshmeat/1.8/bluegriffon-1.8.Ubuntu15.04.x86_64.tar.bz2
 
