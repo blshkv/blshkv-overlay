@@ -18,6 +18,7 @@ SRC_URI="
 	https://github.com/mitchcurtis/SortFilterProxyModel/archive/${SFPM_COMMIT}.tar.gz -> SortFilterProxyModel-${SFPM_COMMIT}.gh.tar.gz
 	https://github.com/amnezia-vpn/3rd-prebuilt/archive/${PREBUILT_COMMIT}.tar.gz -> amnezia-3rd-prebuilt-${PREBUILT_COMMIT}.gh.tar.gz
 "
+S="${WORKDIR}/amnezia-client-${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -39,7 +40,6 @@ RDEPEND="${DEPEND}
 "
 BDEPEND="dev-qt/qttools:6"
 
-S="${WORKDIR}/amnezia-client-${PV}"
 
 src_unpack() {
 	default
