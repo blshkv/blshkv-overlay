@@ -62,6 +62,7 @@ src_unpack() {
 src_prepare() {
 	cmake_src_prepare
 	eapply "${FILESDIR}/${PN}-4.8.15.4-system-libs.patch"
+	eapply "${FILESDIR}/${P}-odr-fix.patch"
 }
 
 src_configure() {
