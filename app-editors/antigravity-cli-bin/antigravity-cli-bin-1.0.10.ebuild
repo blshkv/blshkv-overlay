@@ -7,9 +7,11 @@ DESCRIPTION="Google Antigravity CLI (binary release)"
 HOMEPAGE="https://antigravity.google/"
 
 # extracted from install.sh:
-#   https://antigravity-cli-auto-updater-974169037036.us-central1.run.app/manifests/linux_amd64.json
+#  amd64:
+#    https://antigravity-cli-auto-updater-974169037036.us-central1.run.app/manifests/linux_amd64.json
+#  arm64:
 #   https://antigravity-cli-auto-updater-974169037036.us-central1.run.app/manifests/linux_arm64.json
-RANDOM_SHIT="6109799369277440"
+RANDOM_SHIT="6349723456634880"
 GOOGLE_URL="storage.googleapis.com/antigravity-public/antigravity-cli"
 
 SRC_URI="amd64? ( https://${GOOGLE_URL}/${PV}-${RANDOM_SHIT}/linux-x64/cli_linux_x64.tar.gz  -> ${P}-amd64.tar.gz )
