@@ -1,1 +1,2 @@
 move app-editors/antigravity app-editors/antigravity-bin
+move app-editors/antigravity-cli-bin  dev-util/antigravity-cli-bin
