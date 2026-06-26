@@ -1,10 +1,27 @@
 #!/sbin/openrc-run
-# Copyright 1999-2019 Gentoo Authors
-# Distributed under the terms of the GNU General Public License v2
 
-description="LanguageTool Server"
-command="/usr/bin/languagetool-server"
+description="LanguageTool Embedded HTTP Server"
+
+# Adjust these paths to match your system installation
+HOME_DIR="/usr/share/languagetool"
+JAR_FILE="${HOME_DIR}/languagetool-server.jar"
+#LOG_FILE="/var/log/languagetool.log"
+
+command="/usr/bin/java"
+command_args="-Xmx512M -cp ${JAR_FILE} org.languagetool.server.HTTPServer --config ${HOME_DIR}/server.properties --port 8081 --allow-origin"
+
+#command_user="root:root"
 command_background="true"
 pidfile="/run/${RC_SVCNAME}.pid"
+#output_log="${LOG_FILE}"
+#error_log="${LOG_FILE}"
 
-#start_stop_daemon_args="--quiet -1 /var/log/${RC_SVCNAME}.log -2 /var/log/${RC_SVCNAME}.log"
+depend() {
+    need net
+#    use logger
+}
+
+#start_pre() {
+    # Ensure the log file exists and is accessible
+#    touch "${LOG_FILE}"
+#}
