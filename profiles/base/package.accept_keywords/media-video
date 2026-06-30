@@ -1,0 +1,3 @@
+media-video/botspot-screen-recorder
+# required by botspot-screen-recorder
+=gui-apps/wf-recorder-0.6*

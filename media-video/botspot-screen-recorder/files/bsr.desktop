@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Botspot Screen Recorder
+GenericName=Screen/Webcam Recording Software
+Comment=Screen/Webcam/Audio Recorder for Wayland
+Exec=/usr/bin/botspot-screen-recorder
+Icon=media-record
+Terminal=false
+Type=Application
+Categories=AudioVideo;Recorder;
+StartupNotify=true
+StartupWMClass=media-record

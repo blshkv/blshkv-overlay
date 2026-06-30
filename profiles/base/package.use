@@ -3,3 +3,5 @@ net-libs/libwebsockets http2
 #rda
 www-servers/uwsgi ruby
 dev-ruby/activerecord mysql
+
+gnome-extra/yad -webkit
