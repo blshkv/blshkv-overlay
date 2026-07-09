@@ -5,3 +5,5 @@ www-servers/uwsgi ruby
 dev-ruby/activerecord mysql
 
 gnome-extra/yad -webkit
+
+net-vpn/openvpn kernel-ovpn
