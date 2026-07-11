@@ -1,0 +1,110 @@
+--- a/client/cmake/3rdparty.cmake	2026-07-11 10:44:57.966254890 +0800
++++ b/client/cmake/3rdparty.cmake	2026-07-11 11:09:34.702932727 +0800
+@@ -62,26 +62,13 @@
+     set(OPENSSL_LIB_CRYPTO_PATH "${OPENSSL_ROOT_DIR}/linux/x86_64/libcrypto.a")
+ endif()
+ 
+-file(COPY ${OPENSSL_LIB_SSL_PATH} ${OPENSSL_LIB_CRYPTO_PATH}
+-        DESTINATION ${OPENSSL_LIBRARIES_DIR})
++find_package(OpenSSL REQUIRED)
++set(LIBS ${LIBS} OpenSSL::SSL OpenSSL::Crypto)
+ 
+-set(OPENSSL_USE_STATIC_LIBS TRUE)
+-  
+-set(LIBS ${LIBS} 
+-    ${LIBSSH_LIB_PATH} 
+-    ${ZLIB_LIB_PATH}
+-)
+-  
+-set(LIBS ${LIBS}
+-    ${OPENSSL_LIB_SSL_PATH}
+-    ${OPENSSL_LIB_CRYPTO_PATH}
+-)
+-
+-add_compile_definitions(_WINSOCKAPI_)
+-
+-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+-set(BUILD_WITH_QT6 ON)
+-add_subdirectory(${CLIENT_ROOT_DIR}/3rd/qtkeychain)
++find_package(libssh REQUIRED)
++set(LIBS ${LIBS} ssh)
++
++find_package(Qt6Keychain REQUIRED)
+ 
+ if(ANDROID)
+     # Use qtgamepad from amnezia-vpn/qtgamepad repository
+@@ -102,14 +89,5 @@
+     endif()
+ endif()
+ 
+-set(LIBS ${LIBS} qt6keychain)
++set(LIBS ${LIBS} Qt6Keychain::Qt6Keychain)
+ 
+-include_directories(
+-    ${OPENSSL_INCLUDE_DIR}
+-    ${LIBSSH_INCLUDE_DIR}/include
+-    ${LIBSSH_ROOT_DIR}/include
+-    ${CLIENT_ROOT_DIR}/3rd/libssh/include
+-    ${CLIENT_ROOT_DIR}/3rd/qtkeychain/qtkeychain
+-    ${CMAKE_CURRENT_BINARY_DIR}/3rd/qtkeychain
+-    ${CMAKE_CURRENT_BINARY_DIR}/3rd/libssh/include
+-)
+--- a/service/server/CMakeLists.txt	2026-07-11 10:45:24.841651999 +0800
++++ b/service/server/CMakeLists.txt	2026-07-11 11:01:30.968511985 +0800
+@@ -60,9 +60,11 @@
+ 
+ set(OPENSSL_USE_STATIC_LIBS TRUE)
+ 
++find_package(OpenSSL REQUIRED)
++find_package(Qt6Keychain REQUIRED)
++
+ include_directories(
+     ${AMNEZIA_XRAY_INCLUDE_DIR}
+-    ${OPENSSL_INCLUDE_DIR}
+ )
+ 
+ set(HEADERS
+@@ -229,8 +231,8 @@
+         Advapi32
+         Kernel32
+         ${AMNEZIA_XRAY_LIB_PATH}
+-        ${OPENSSL_LIB_CRYPTO_PATH}
+-        qt6keychain
++        OpenSSL::Crypto
++        Qt6Keychain::Qt6Keychain
+     )
+ 
+     add_compile_definitions(_WINSOCKAPI_)
+@@ -279,8 +281,8 @@
+     set(LIBS
+         resolv
+         ${AMNEZIA_XRAY_LIB_PATH}
+-        ${OPENSSL_LIB_CRYPTO_PATH}
+-        qt6keychain
++        OpenSSL::Crypto
++        Qt6Keychain::Qt6Keychain
+     )
+ 
+ endif()
+@@ -318,8 +320,8 @@
+ 
+     set(LIBS
+         ${AMNEZIA_XRAY_LIB_PATH}    
+-        ${OPENSSL_LIB_CRYPTO_PATH}
+-        qt6keychain
++        OpenSSL::Crypto
++        Qt6Keychain::Qt6Keychain
+         -static-libstdc++
+         -static-libgcc
+         -ldl
+--- a/client/secure_qsettings.h	2026-07-11 10:49:41.496932634 +0800
++++ b/client/secure_qsettings.h	2026-07-11 10:49:41.499336223 +0800
+@@ -6,7 +6,7 @@
+ #include <QObject>
+ #include <QSettings>
+ 
+-#include "../client/3rd/qtkeychain/qtkeychain/keychain.h"
++#include <qt6keychain/keychain.h>
+ 
+ class SecureQSettings : public QObject
+ {

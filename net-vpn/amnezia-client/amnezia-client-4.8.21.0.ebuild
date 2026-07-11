@@ -4,7 +4,7 @@
 EAPI=8
 
 PREBUILT_COMMIT="51bb4703a4049e4d28ef7e28c2ec87db1bbb0d1e"
-QSIMPLECRYPTO_COMMIT="c99b33f0e08b7206116ddff85c22d3b97ce1e79d"
+#QSIMPLECRYPTO_COMMIT="c99b33f0e08b7206116ddff85c22d3b97ce1e79d"
 SFPM_COMMIT="f2881493e42bd7b7d5b7abe804dad084dd610b71"
 
 inherit cmake desktop xdg
@@ -14,10 +14,10 @@ HOMEPAGE="https://amnezia.org"
 
 SRC_URI="
 	https://github.com/amnezia-vpn/amnezia-client/archive/refs/tags/${PV}.tar.gz -> ${P}.gh.tar.gz
-	https://github.com/amnezia-vpn/QSimpleCrypto/archive/${QSIMPLECRYPTO_COMMIT}.tar.gz -> QSimpleCrypto-${QSIMPLECRYPTO_COMMIT}.gh.tar.gz
 	https://github.com/mitchcurtis/SortFilterProxyModel/archive/${SFPM_COMMIT}.tar.gz -> SortFilterProxyModel-${SFPM_COMMIT}.gh.tar.gz
 	https://github.com/amnezia-vpn/3rd-prebuilt/archive/${PREBUILT_COMMIT}.tar.gz -> amnezia-3rd-prebuilt-${PREBUILT_COMMIT}.gh.tar.gz
 "
+#	https://github.com/amnezia-vpn/QSimpleCrypto/archive/${QSIMPLECRYPTO_COMMIT}.tar.gz -> QSimpleCrypto-${QSIMPLECRYPTO_COMMIT}.gh.tar.gz
 S="${WORKDIR}/amnezia-client-${PV}"
 
 LICENSE="GPL-3"
@@ -45,9 +45,9 @@ src_unpack() {
 	default
 
 	# Place submodules that have no system package
-	rmdir "${S}/client/3rd/QSimpleCrypto" || die
-	mv "${WORKDIR}/QSimpleCrypto-${QSIMPLECRYPTO_COMMIT}" \
-		"${S}/client/3rd/QSimpleCrypto" || die
+#	rmdir "${S}/client/3rd/QSimpleCrypto" || die
+#	mv "${WORKDIR}/QSimpleCrypto-${QSIMPLECRYPTO_COMMIT}" \
+#		"${S}/client/3rd/QSimpleCrypto" || die
 
 	rmdir "${S}/client/3rd/SortFilterProxyModel" || die
 	mv "${WORKDIR}/SortFilterProxyModel-${SFPM_COMMIT}" \
@@ -62,6 +62,7 @@ src_unpack() {
 src_prepare() {
 	cmake_src_prepare
 	eapply "${FILESDIR}/${P}-system-libs.patch"
+	eapply "${FILESDIR}/${PN}-4.8.18.0-odr-fix.patch"
 }
 
 src_configure() {
