@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+
+  <maintainer type="project">
+    <email>anton.bugs@gmail.com</email>
+    <name>Anton</name>
+  </maintainer>
+
+  <upstream>
+    <remote-id type="pypi">python-roborock</remote-id>
+    <remote-id type="github">python-roborock/python-roborock</remote-id>
+  </upstream>
+
+  <use>
+    <flag name="cli">optional dependencies for cli tools</flag>
+  </use>
+
+</pkgmetadata>

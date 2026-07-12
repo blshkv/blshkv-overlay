@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>gentoo@houseofsuns.org</email>
+		<name>Markus Walter</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">KimiNewt/pyshark</remote-id>
+		<remote-id type="pypi">pyshark</remote-id>
+	</upstream>
+</pkgmetadata>
