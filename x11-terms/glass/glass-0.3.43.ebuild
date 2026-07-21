@@ -22,6 +22,7 @@ RDEPEND="media-fonts/font-misc-misc"
 
 src_prepare() {
 	eapply "${FILESDIR}/${P}-selection-extract-oob.patch"
+	eapply "${FILESDIR}/${P}-gc-bg-alpha-argb.patch"
 	eapply_user
 }
 
