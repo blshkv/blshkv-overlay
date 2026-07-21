@@ -20,6 +20,11 @@ KEYWORDS="-* amd64"
 BDEPEND="dev-lang/nasm"
 RDEPEND="media-fonts/font-misc-misc"
 
+src_prepare() {
+	eapply "${FILESDIR}/${P}-selection-extract-oob.patch"
+	eapply_user
+}
+
 src_unpack() {
 	default
 	# glass.asm does: %include "../glyph/glyph.asm"
