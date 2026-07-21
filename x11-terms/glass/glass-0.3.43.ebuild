@@ -18,6 +18,7 @@ SLOT="0"
 KEYWORDS="-* amd64"
 
 BDEPEND="dev-lang/nasm"
+RDEPEND="media-fonts/font-misc-misc"
 
 src_unpack() {
 	default
