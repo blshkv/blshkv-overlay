@@ -1,0 +1,64 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -9,8 +9,6 @@
+ set(QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP ON CACHE BOOL "" FORCE)
+ set(CMAKE_PROJECT_TOP_LEVEL_INCLUDES
+     ${CMAKE_SOURCE_DIR}/cmake/platform_settings.cmake
+-    ${CMAKE_SOURCE_DIR}/cmake/recipes_bootstrap.cmake
+-    ${CMAKE_SOURCE_DIR}/cmake/conan_provider.cmake
+     CACHE STRING "" FORCE)
+
+ project(${PROJECT} VERSION ${AMNEZIAVPN_VERSION}
+@@ -18,7 +16,6 @@
+         HOMEPAGE_URL "https://amnezia.org/"
+ )
+
+-# trigger conan to kick off `conan install` globally
+ find_package(OpenSSL REQUIRED)
+ if (PREBUILTS_ONLY)
+     return()
+--- a/service/server/CMakeLists.txt
++++ b/service/server/CMakeLists.txt
+@@ -291,8 +291,9 @@
+ target_link_libraries(${PROJECT} PRIVATE Qt6::Core Qt6::Widgets Qt6::Network Qt6::RemoteObjects Qt6::Core5Compat Qt6::DBus Qt6::Concurrent ${LIBS})
+ target_compile_definitions(${PROJECT} PRIVATE "MZ_$<UPPER_CASE:${MZ_PLATFORM_NAME}>")
+
+-find_package(amnezia-xray-bindings REQUIRED)
+-target_link_libraries(${PROJECT} PRIVATE amnezia::xray-bindings)
++set(_XRAY_PREBUILT "${CMAKE_SOURCE_DIR}/client/3rd-prebuilt/3rd-prebuilt/amnezia_xray/linux/x86_64")
++target_include_directories(${PROJECT} PRIVATE "${_XRAY_PREBUILT}")
++target_link_libraries(${PROJECT} PRIVATE "${_XRAY_PREBUILT}/amnezia_xray.a")
+
+ find_package(OpenSSL REQUIRED)
+ target_link_libraries(${PROJECT} PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+@@ -342,6 +343,7 @@
+ endif()
+
+ # install non-linked dependencies
++set(_LINUX_BIN "${CMAKE_SOURCE_DIR}/client/3rd-prebuilt/deploy-prebuilt/linux/client/bin")
+ if(WIN32)
+     find_package(awg-windows REQUIRED)
+     list(APPEND CONAN_EXECS $<TARGET_FILE:amnezia::awg-windows>)
+@@ -351,18 +353,12 @@
+
+     list(APPEND CONAN_BINS $<TARGET_FILE:OpenSSL::SSL> $<TARGET_FILE:OpenSSL::Crypto>)
+ else()
+-    find_package(awg-go REQUIRED)
+-    list(APPEND CONAN_EXECS $<TARGET_FILE:amnezia::awg-go>)
++    list(APPEND CONAN_EXECS "${_LINUX_BIN}/wireguard-go")
+ endif()
+
+-find_package(openvpn REQUIRED)
+-list(APPEND CONAN_EXECS $<TARGET_FILE:openvpn::openvpn>)
+-
+-find_package(tun2socks REQUIRED)
+-list(APPEND CONAN_EXECS $<TARGET_FILE:xjasonlyu::tun2socks>)
+-
+-find_package(v2ray-rules-dat REQUIRED)
+-list(APPEND CONAN_BINS ${GEOSITE_DAT_PATH} ${GEOIP_DAT_PATH})
++list(APPEND CONAN_EXECS "${_LINUX_BIN}/openvpn")
++list(APPEND CONAN_EXECS "${_LINUX_BIN}/tun2socks")
++list(APPEND CONAN_BINS "${_LINUX_BIN}/geosite.dat" "${_LINUX_BIN}/geoip.dat")
+
+ add_custom_command(TARGET ${PROJECT} POST_BUILD
+     COMMAND ${CMAKE_COMMAND} -E copy_if_different
