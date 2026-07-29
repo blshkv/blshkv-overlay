@@ -1,0 +1,10 @@
+--- a/daemon/Makefile.am
++++ b/daemon/Makefile.am
+@@ -13,6 +13,7 @@
+ 	@CURL_CFLAGS@ \
+ 	@BPWRAPPER_CFLAGS@ \
+ 	@GNUTLS_CFLAGS@ \
++	@WS_CFLAGS@ \
+ 	-Wall
+
+ if MACOS
