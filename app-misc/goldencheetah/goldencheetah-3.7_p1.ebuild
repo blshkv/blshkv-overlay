@@ -17,7 +17,7 @@ S="${WORKDIR}"/GoldenCheetah-${MY_PV}
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="+oauth"
+IUSE="debug +oauth"
 
 RDEPEND="sys-devel/flex
 	sys-devel/bison
@@ -58,8 +58,12 @@ src_prepare() {
 	cp qwt/qwtconfig.pri.in qwt/qwtconfig.pri
 	cp src/gcconfig.pri.in src/gcconfig.pri
 
+	if use debug; then
+		sed -i '/CONFIG += debug/s/^#//g' src/gcconfig.pri
+	else
+		sed -i '/CONFIG += release/s/^#//g' src/gcconfig.pri
+	fi
 	# See INSTALL-LINUX
-	sed -i '/CONFIG += release/s/^#//g' src/gcconfig.pri
 	sed -i '/GSL_INCLUDES = \/usr\/include/s/^#//g' src/gcconfig.pri
 	sed -i '/GSL_LIBS = -lgsl/s/^#//g' src/gcconfig.pri
 	sed -i '/QMAKE_LRELEASE/s/^#//g' src/gcconfig.pri
