@@ -1,4 +1,4 @@
-net-libs/libwebsockets http2
+#net-libs/libwebsockets http2
 
 #rda
 www-servers/uwsgi ruby
