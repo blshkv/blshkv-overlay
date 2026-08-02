@@ -56,3 +56,13 @@ dev-ruby/sprockets:4
 dev-ruby/importmap-rails:2
 
 dev-ruby/action_text-trix
+
+# ruby 34
+=dev-ruby/repl_type_completor-0.1.12 ~amd64
+=virtual/ruby-ssl-16 ~amd64
+=dev-ruby/resolv-0.7.0 ~amd64
+=dev-ruby/dry-types-1.9.0 ~amd64
+=dev-ruby/rinda-0.2.0 ~amd64
+=dev-ruby/syslog-0.3.0 ~amd64
+=virtual/rubygems-22 ~amd64
+=dev-ruby/resolv-replace-0.2.0 ~amd64
