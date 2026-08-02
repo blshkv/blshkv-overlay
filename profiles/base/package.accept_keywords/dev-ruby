@@ -43,7 +43,7 @@ dev-ruby/mini_magick:5
 
 dev-ruby/sprockets-rails:3
 dev-ruby/jquery-rails:4
-dev-ruby/jquery-ui-rails:7
+dev-ruby/jquery-ui-rails:8
 dev-ruby/sass-rails:6.0
 dev-ruby/sprockets:4
 =dev-ruby/cgi-0.4*
