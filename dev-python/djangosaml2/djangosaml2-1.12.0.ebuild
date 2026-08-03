@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="amd64"
 
 RDEPEND=">=dev-python/defusedxml-0.4.1[${PYTHON_USEDEP}]
-	>=dev-python/django-2.2[${PYTHON_USEDEP}]
+	>=dev-python/django-4.2[${PYTHON_USEDEP}]
 	>=dev-python/pysaml2-6.5.1[${PYTHON_USEDEP}]
 "
 
