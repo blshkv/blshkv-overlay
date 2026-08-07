@@ -24,6 +24,7 @@ dev-ruby/activemodel:7.2
 dev-ruby/activerecord:7.2
 dev-ruby/activestorage:7.2
 dev-ruby/activesupport:7.2
+~app-eselect/eselect-rails-0.29
 
 =dev-ruby/marcel-1.0*
 dev-ruby/websocket-driver:0.7
