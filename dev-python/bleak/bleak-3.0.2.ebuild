@@ -1,9 +1,9 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 PYTHON_COMPAT=( python3_{12..14} )
-DISTUTILS_USE_PEP517=poetry
+DISTUTILS_USE_PEP517=uv-build
 inherit distutils-r1 pypi
 
 DESCRIPTION="Bluetooth Low Energy platform Agnostic Klient"
@@ -17,9 +17,8 @@ RESTRICT="!test? ( test )"
 
 DOCS="README.rst"
 
+#FIXME: optional pythonista = ["bleak-pythonista>=0.1.1"]
 RDEPEND="
-	$(python_gen_cond_dep 'dev-python/async-timeout[${PYTHON_USEDEP}]' python3_{10..11})
-	$(python_gen_cond_dep 'dev-python/typing-extensions[${PYTHON_USEDEP}]' python3_11)
 	>=dev-python/dbus-fast-1.83.0[${PYTHON_USEDEP}]"
 #		dev-python/asynctest[${PYTHON_USEDEP}]
 BDEPEND="
