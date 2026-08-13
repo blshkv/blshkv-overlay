@@ -1,0 +1,56 @@
+--- a/rehlds/CMakeLists.txt
++++ b/rehlds/CMakeLists.txt
+@@ -292,6 +292,9 @@ set(LINK_FLAGS "${LINK_FLAGS} \
+ 	-Wl,-rpath,'$ORIGIN/.' \
+ 	-L${PROJECT_SOURCE_DIR}/lib/linux32")
+
++# libaelf32.a ships prebuilt non-PIC i386 objects; allow text relocations.
++set(LINK_FLAGS "${LINK_FLAGS} -Wl,-z,notext")
++
+ set_target_properties(engine PROPERTIES
+ 	OUTPUT_NAME engine_i486
+ 	PREFIX ""
+--- a/rehlds/filesystem/FileSystem_Stdio/CMakeLists.txt
++++ b/rehlds/filesystem/FileSystem_Stdio/CMakeLists.txt
+@@ -100,3 +100,5 @@
+ )
+
++set(LINK_FLAGS "${LINK_FLAGS} -Wl,-z,notext")
++
+ set_target_properties(filesystem_stdio PROPERTIES
+--- a/rehlds/HLTV/Core/CMakeLists.txt
++++ b/rehlds/HLTV/Core/CMakeLists.txt
+@@ -137,3 +137,5 @@
+ endif()
+
++set(LINK_FLAGS "${LINK_FLAGS} -Wl,-z,notext")
++
+ set_target_properties(core PROPERTIES
+--- a/rehlds/HLTV/Proxy/CMakeLists.txt
++++ b/rehlds/HLTV/Proxy/CMakeLists.txt
+@@ -146,5 +146,6 @@
+ set(LINK_FLAGS "${LINK_FLAGS} \
+ 	-Wl,-rpath,'$ORIGIN/.' \
+-	-L${PROJECT_SOURCE_DIR}/../../lib/linux32")
++	-L${PROJECT_SOURCE_DIR}/../../lib/linux32 \
++	-Wl,-z,notext")
+
+ set_target_properties(proxy PROPERTIES
+--- a/rehlds/HLTV/Director/CMakeLists.txt
++++ b/rehlds/HLTV/Director/CMakeLists.txt
+@@ -110,5 +110,6 @@
+ set(LINK_FLAGS "${LINK_FLAGS} \
+ 	-Wl,-rpath,'$ORIGIN/.' \
+-	-L${PROJECT_SOURCE_DIR}/../../lib/linux32")
++	-L${PROJECT_SOURCE_DIR}/../../lib/linux32 \
++	-Wl,-z,notext")
+
+ set_target_properties(director PROPERTIES
+--- a/rehlds/HLTV/DemoPlayer/CMakeLists.txt
++++ b/rehlds/HLTV/DemoPlayer/CMakeLists.txt
+@@ -106,3 +106,5 @@
+ )
+
++set(LINK_FLAGS "${LINK_FLAGS} -Wl,-z,notext")
++
+ set_target_properties(demoplayer PROPERTIES

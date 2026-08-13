@@ -1,0 +1,43 @@
+--- a/rehlds/HLTV/Core/CMakeLists.txt
++++ b/rehlds/HLTV/Core/CMakeLists.txt
+@@ -33,6 +33,6 @@
+ 	# Produce code optimized for the most common IA32/AMD64/EM64T processors.
+ 	# As new processors are deployed in the marketplace, the behavior of this option will change.
+-	set(COMPILE_FLAGS "${COMPILE_FLAGS} -mtune=generic -msse3 -flto\
++	set(COMPILE_FLAGS "${COMPILE_FLAGS} -mtune=generic -msse3\
+ 		-fpermissive -fno-sized-deallocation\
+ 		-Wno-unused-result -Wno-unknown-pragmas -Wno-unused-variable\
+ 		-Wno-sign-compare -Wno-write-strings -Wno-strict-aliasing")
+--- a/rehlds/HLTV/Proxy/CMakeLists.txt
++++ b/rehlds/HLTV/Proxy/CMakeLists.txt
+@@ -34,7 +34,7 @@
+ 	# Produce code optimized for the most common IA32/AMD64/EM64T processors.
+ 	# As new processors are deployed in the marketplace, the behavior of this option will change.
+ 	set(COMPILE_FLAGS "${COMPILE_FLAGS} \
+-		-mtune=generic -msse3 -flto\
++		-mtune=generic -msse3\
+ 		-fpermissive -fno-sized-deallocation\
+ 		-Wno-unused-result -Wno-unknown-pragmas -Wno-unused-variable\
+ 		-Wno-write-strings -Wno-strict-aliasing")
+--- a/rehlds/HLTV/Director/CMakeLists.txt
++++ b/rehlds/HLTV/Director/CMakeLists.txt
+@@ -34,7 +34,7 @@
+ 	# Produce code optimized for the most common IA32/AMD64/EM64T processors.
+ 	# As new processors are deployed in the marketplace, the behavior of this option will change.
+ 	set(COMPILE_FLAGS "${COMPILE_FLAGS} \
+-		-mtune=generic -msse3 -flto\
++		-mtune=generic -msse3\
+ 		-fpermissive -fno-sized-deallocation\
+ 		-Wno-unused-result -Wno-unknown-pragmas\
+ 		-Wno-write-strings -Wno-strict-aliasing")
+--- a/rehlds/HLTV/DemoPlayer/CMakeLists.txt
++++ b/rehlds/HLTV/DemoPlayer/CMakeLists.txt
+@@ -34,7 +34,7 @@
+ 	# Produce code optimized for the most common IA32/AMD64/EM64T processors.
+ 	# As new processors are deployed in the marketplace, the behavior of this option will change.
+ 	set(COMPILE_FLAGS "${COMPILE_FLAGS} \
+-		-mtune=generic -msse3 -flto\
++		-mtune=generic -msse3\
+ 		-fpermissive -fno-sized-deallocation\
+ 		-Wno-unused-result -Wno-unknown-pragmas\
+ 		-Wno-sign-compare -Wno-write-strings -Wno-strict-aliasing")
