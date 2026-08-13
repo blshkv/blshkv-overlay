@@ -1,0 +1,8 @@
+--- a/regamedll/CMakeLists.txt
++++ b/regamedll/CMakeLists.txt
+@@ -417,3 +417,5 @@
+ endif()
+
++set(LINK_FLAGS "${LINK_FLAGS} -Wl,-z,notext")
++
+ set_target_properties(regamedll PROPERTIES

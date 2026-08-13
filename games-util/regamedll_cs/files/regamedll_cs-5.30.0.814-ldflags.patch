@@ -1,0 +1,7 @@
+--- a/regamedll/CMakeLists.txt
++++ b/regamedll/CMakeLists.txt
+@@ -43,3 +43,3 @@
+ if (NOT DEBUG)
+-	set(LINK_FLAGS "-s")
++	set(LINK_FLAGS "")
+ endif()
