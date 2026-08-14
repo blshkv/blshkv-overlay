@@ -11,6 +11,7 @@ DESCRIPTION="Enhanced version of the HLDS engine"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
+IUSE="debug"
 
 # Intentionally non-PIC i386 shared libraries
 QA_TEXTRELS="
@@ -38,6 +39,9 @@ src_configure() {
 	# i386 shared libs are intentionally built without -fPIC; LTO causes the
 	# linker to generate text relocations which modern ld rejects as an error.
 	filter-lto
+	local mycmakeargs=(
+		-DDEBUG=$(usex debug ON OFF)
+	)
 	cmake_src_configure
 }
 
