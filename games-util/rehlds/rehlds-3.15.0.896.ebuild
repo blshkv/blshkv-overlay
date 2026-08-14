@@ -32,6 +32,7 @@ QA_EXECSTACK="
 src_prepare() {
 	eapply "${FILESDIR}/${P}-notext.patch"
 	eapply "${FILESDIR}/${P}-no-hardcoded-lto.patch"
+	eapply "${FILESDIR}/${P}-sigaction-init.patch"
 	cmake_src_prepare
 }
 
