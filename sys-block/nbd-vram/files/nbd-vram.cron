@@ -1,0 +1,2 @@
+# Run power-state check every minute (replaces nbd-vram-battery-watch.timer)
+* * * * * root /usr/bin/nbd-vram-power-check.sh

@@ -1,0 +1,9 @@
+# VRAM to allocate for swap (MiB). Edit before first start.
+VRAM_SETUP_SIZE_MB=7168
+
+# Swap priority (higher = used before RAM swap). 1500 = very high.
+VRAM_SWAP_PRIORITY=1500
+
+# NBD server worker threads and client connections.
+VRAM_NBD_THREADS=4
+VRAM_NBD_CONNECTIONS=4

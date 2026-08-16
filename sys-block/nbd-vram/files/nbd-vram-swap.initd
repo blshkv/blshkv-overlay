@@ -1,0 +1,48 @@
+#!/sbin/openrc-run
+
+description="VRAM Swap via NBD (CUDA memcpy backend)"
+command="/usr/bin/nbd-vram"
+command_background="yes"
+pidfile="/run/nbd-vram-swap.pid"
+
+# Defaults — overridden by /etc/conf.d/nbd-vram-swap (sourced by OpenRC before this file)
+: ${VRAM_SETUP_SIZE_MB:=7168}
+: ${VRAM_SWAP_PRIORITY:=1500}
+: ${VRAM_NBD_THREADS:=4}
+: ${VRAM_NBD_CONNECTIONS:=4}
+# Export at top level so nbd-vram-connect.sh (called from start_post) inherits them
+export VRAM_SETUP_SIZE_MB VRAM_SWAP_PRIORITY VRAM_NBD_THREADS VRAM_NBD_CONNECTIONS
+
+depend() {
+	after modules
+	use logger
+}
+
+start_pre() {
+	nvidia-smi -pm 1 || true
+	sysctl -w vm.swappiness=200 vm.min_free_kbytes=524288
+}
+
+start_post() {
+	local timeout=60
+	while [ "${timeout}" -gt 0 ]; do
+		[ -S /run/nbd-vram.sock ] && break
+		sleep 1
+		: $(( timeout -= 1 ))
+	done
+	[ -S /run/nbd-vram.sock ] || { eerror "nbd-vram socket not ready after 60s"; return 1; }
+	/usr/bin/nbd-vram-connect.sh || return 1
+	[ -r "${pidfile}" ] && \
+		echo -1000 > "/proc/$(cat "${pidfile}")/oom_score_adj" 2>/dev/null || true
+}
+
+stop_pre() {
+	/usr/bin/nbd-vram-disconnect.sh || return 1
+}
+
+stop() {
+	ebegin "Stopping ${RC_SVCNAME}"
+	start-stop-daemon --stop --quiet --pidfile "${pidfile}" \
+		--retry TERM/1800 --oknodo
+	eend $?
+}
