@@ -4,6 +4,8 @@ description="VRAM Swap via NBD (CUDA memcpy backend)"
 command="/usr/bin/nbd-vram"
 command_background="yes"
 pidfile="/run/nbd-vram-swap.pid"
+output_log="/var/log/nbd-vram-swap.log"
+error_log="/var/log/nbd-vram-swap.log"
 
 # Defaults — overridden by /etc/conf.d/nbd-vram-swap (sourced by OpenRC before this file)
 : ${VRAM_SETUP_SIZE_MB:=7168}
@@ -14,7 +16,9 @@ pidfile="/run/nbd-vram-swap.pid"
 export VRAM_SETUP_SIZE_MB VRAM_SWAP_PRIORITY VRAM_NBD_THREADS VRAM_NBD_CONNECTIONS
 
 depend() {
-	after modules
+	# Start after the display manager so the GPU is initialized for CUDA
+	# (PRIME offload needs X to claim the GPU first on hybrid laptops)
+	after modules xdm
 	use logger
 }
 
