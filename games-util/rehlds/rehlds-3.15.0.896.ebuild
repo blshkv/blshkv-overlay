@@ -60,4 +60,9 @@ src_install() {
 
 	insinto /opt/Steam/rehlds/valve/dlls
 	doins "${BUILD_DIR}"/rehlds/HLTV/Director/director.so
+	
+	#the following libraries need to be removed from steam installation:
+	#or create a symlink, perhaps?
+	#libgcc_s.so.1
+	#libstdc++.so.6
 }
