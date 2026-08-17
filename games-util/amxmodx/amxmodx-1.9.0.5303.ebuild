@@ -19,18 +19,18 @@ IUSE="debug mysql +cstrike dod esf ns tfc ts"
 
 # 32-bit .so files compiled without -fPIC
 QA_TEXTRELS="
-	opt/Steam/addons/amxmodx/dlls/*
-	opt/Steam/addons/amxmodx/modules/*
-	opt/Steam/cstrike/addons/amxmodx/modules/*
-	opt/Steam/dod/addons/amxmodx/modules/*
-	opt/Steam/esf/addons/amxmodx/modules/*
-	opt/Steam/ns/addons/amxmodx/modules/*
-	opt/Steam/tfc/addons/amxmodx/modules/*
-	opt/Steam/ts/addons/amxmodx/modules/*
+	opt/Steam/${PN}/addons/amxmodx/dlls/*
+	opt/Steam/${PN}/addons/amxmodx/modules/*
+	opt/Steam/${PN}/cstrike/addons/amxmodx/modules/*
+	opt/Steam/${PN}/dod/addons/amxmodx/modules/*
+	opt/Steam/${PN}/esf/addons/amxmodx/modules/*
+	opt/Steam/${PN}/ns/addons/amxmodx/modules/*
+	opt/Steam/${PN}/tfc/addons/amxmodx/modules/*
+	opt/Steam/${PN}/ts/addons/amxmodx/modules/*
 	usr/bin/amxxpc32.so
 "
 
-#CONFIG_PROTECT="/opt/Steam/addons/amxmodx/configs"
+#CONFIG_PROTECT="/opt/Steam/${PN}/addons/amxmodx/configs"
 
 BDEPEND="
 	dev-build/ambuild
@@ -101,7 +101,7 @@ src_install() {
 	for game in cstrike dod esf ns tfc ts; do
 		use ${game} || continue
 		[[ -d "${BUILD_DIR}/packages/${game}" ]] || continue
-		insinto /opt/Steam/${game}
+		insinto /opt/Steam/${PN}/${game}
 		doins -r "${BUILD_DIR}/packages/${game}/."
 	done
 
