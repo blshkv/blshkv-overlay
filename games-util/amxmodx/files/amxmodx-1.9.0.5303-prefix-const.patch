@@ -1,0 +1,22 @@
+--- a/compiler/libpc300/prefix.c
++++ b/compiler/libpc300/prefix.c
+@@ -393,7 +393,8 @@
+ char *
+ br_extract_dir (const char *path)
+ {
+-	char *end, *result;
++	const char *end;
++	char *result;
+ 
+ 	br_return_val_if_fail (path != (char *) NULL, (char *) NULL);
+ 
+@@ -428,7 +429,8 @@
+ char *
+ br_extract_prefix (const char *path)
+ {
+-	char *end, *tmp, *result;
++	const char *end;
++	char *tmp, *result;
+ 
+ 	br_return_val_if_fail (path != (char *) NULL, (char *) NULL);
+ 

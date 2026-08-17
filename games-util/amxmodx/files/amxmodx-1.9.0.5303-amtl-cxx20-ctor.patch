@@ -1,0 +1,11 @@
+--- a/public/amtl/amtl/am-raii.h
++++ b/public/amtl/amtl/am-raii.h
+@@ -55,7 +55,7 @@
+ class StackLinked
+ {
+  public:
+-  StackLinked<T>(T** prevp)
++  StackLinked(T** prevp)
+    : prevp_(prevp),
+      prev_(*prevp)
+   {
