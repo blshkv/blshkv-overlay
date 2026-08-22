@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PREBUILT_COMMIT="51bb4703a4049e4d28ef7e28c2ec87db1bbb0d1e"
+PREBUILT_COMMIT="4680bd8fb4173ad921f6181f7843ee5ae99b039b"
 #QSIMPLECRYPTO_COMMIT="c99b33f0e08b7206116ddff85c22d3b97ce1e79d"
 SFPM_COMMIT="f2881493e42bd7b7d5b7abe804dad084dd610b71"
 
@@ -54,15 +54,18 @@ src_unpack() {
 		"${S}/client/3rd/SortFilterProxyModel" || die
 
 	# Place 3rd-prebuilt for amnezia_xray prebuilt static library
-	rmdir "${S}/client/3rd-prebuilt" || die
+#	rmdir "${S}/client/3rd-prebuilt" || die
 	mv "${WORKDIR}/3rd-prebuilt-${PREBUILT_COMMIT}" \
 		"${S}/client/3rd-prebuilt" || die
 }
 
 src_prepare() {
 	cmake_src_prepare
+	eapply "${FILESDIR}/${P}-no-conan.patch"
 	eapply "${FILESDIR}/${P}-system-libs.patch"
-	eapply "${FILESDIR}/${PN}-4.8.18.0-odr-fix.patch"
+	eapply "${FILESDIR}/${P}-odr-fix.patch"
+	sed -i 's|"\.\./client/3rd/qtkeychain/qtkeychain/keychain\.h"|<qt6keychain/keychain.h>|' \
+		client/secureQSettings.h || die
 }
 
 src_configure() {
