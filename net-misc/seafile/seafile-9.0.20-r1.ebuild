@@ -43,7 +43,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-#	eapply "${FILESDIR}/${P}-ws-cflags.patch"
+	eapply "${FILESDIR}/${P}-ws-cflags.patch"
 	default
 	eautoreconf
 }
