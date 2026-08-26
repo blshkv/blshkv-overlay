@@ -43,6 +43,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	# https://github.com/haiwen/seafile/pull/3063
 	eapply "${FILESDIR}/${P}-ws-cflags.patch"
 	default
 	eautoreconf
