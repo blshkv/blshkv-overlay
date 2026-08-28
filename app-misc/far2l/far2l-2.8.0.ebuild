@@ -13,7 +13,7 @@ PYTHON_COMPAT=( python3_{12..14} )
 
 WX_GTK_VER="3.2-gtk3"
 
-inherit cmake xdg wxwidgets
+inherit cmake flag-o-matic xdg wxwidgets
 
 DESCRIPTION="Linux port of FAR Manager v2"
 HOMEPAGE="https://github.com/elfmz/far2l"
@@ -55,6 +55,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	filter-lto
 	sed -e "s:execute_process(COMMAND ln -sf \../../bin/far2l \${CMAKE_INSTALL_PREFIX}/lib/far2l/far2l_askpass)::" \
 		-i "${S}"/CMakeLists.txt || die
 	sed -e "s:execute_process(COMMAND ln -sf \../../bin/far2l \${CMAKE_INSTALL_PREFIX}/lib/far2l/far2l_sudoapp)::" \
