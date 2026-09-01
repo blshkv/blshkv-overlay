@@ -3,23 +3,14 @@
 
 EAPI=8
 
-M_PN=LenovoLegionLinux
-
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=(python3_{12..14})
 
-inherit linux-mod-r1 distutils-r1 systemd optfeature
-
-if [[ ${PV} == "9999" ]]; then
-	EGIT_REPO_URI="https://github.com/johnfanv2/${M_PN}.git"
-	inherit git-r3
-else
-	SRC_URI="https://github.com/johnfanv2/${M_PN}/archive/refs/tags/v${PV}.tar.gz"
-	KEYWORDS="~amd64"
-fi
+GITHUB_REPOSITORY="johnfanv2/LenovoLegionLinux"
+GITHUB_TAG="v${PV}"
+inherit github-archive linux-mod-r1 distutils-r1 systemd optfeature
 
 DESCRIPTION="Lenovo Legion Linux kernel module"
-HOMEPAGE="https://github.com/johnfanv2/LenovoLegionLinux"
 
 BDEPEND="
 	sys-kernel/linux-headers
@@ -45,6 +36,7 @@ DEPEND="${RDEPEND}"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="+gui downgrade-nvidia elogind"
+
 MODULES_KERNEL_MIN=5.10
 
 src_compile() {
@@ -54,16 +46,11 @@ src_compile() {
 	export KERNELVERSION=${KV_FULL}
 	linux-mod-r1_src_compile
 	if use gui; then
-		if [[ ${PV} == "9999" ]]; then
-			#fix python package version
-			sed -i "s/version = _VERSION/version = 9999/g" "${WORKDIR}/${P}/python/legion_linux/setup.cfg"
-		else
-			#fix python package version
-			sed -i "s/version = _VERSION/version = ${PV}/g" "${WORKDIR}/${P}/python/legion_linux/setup.cfg"
-		fi
+		#fix python package version
+		sed -i "s/version = _VERSION/version = ${PV}/g" "python/legion_linux/setup.cfg"
 		#Define build dir (fix sandboxed)
-		cd "${WORKDIR}/${P}/python/legion_linux" || die
-		distutils-r1_src_compile --build-dir "${WORKDIR}/${P}/python/legion_linux/build"
+		cd "python/legion_linux" || die
+		distutils-r1_src_compile --build-dir "python/legion_linux/build"
 		cd "legion_linux/extra/service/legiond" || die
 		emake
 	fi
@@ -73,21 +60,21 @@ src_install() {
 	linux-mod-r1_src_install
 	if use gui; then
 		#Define build dir (fix sandboxed)
-		cd "${WORKDIR}/${P}/python/legion_linux/" || die
-		distutils-r1_src_install --build-dir "${WORKDIR}/${P}/python/legion_linux/build"
+		cd python/legion_linux/ || die
+		distutils-r1_src_install --build-dir build
 
-		cd "${WORKDIR}/${P}/extra" || die
+		cd extra || die
 
 		systemd_dounit service/legiond.service service/legiond-onresume.service service/legiond-cpuset.service service/legiond-cpuset.timer
 
-        newinitd service/legiond.initd legiond
+		newinitd service/legiond.initd legiond
 		newinitd service/legiond-cpuset.initd legiond
 		newsbin service/legiond-cpuset.sh legiond-cpuset
 
-        if use elogind; then
-            exeinto /lib64/elogind/system-sleep/
-            doexe service/legiond-onresume.sh
-        fi
+		if use elogind; then
+			exeinto /lib64/elogind/system-sleep/
+			doexe service/legiond-onresume.sh
+		fi
 
 		insinto /etc/acpi/events
 		doins acpi/events/{legion_ppd,legion_ac}
@@ -112,7 +99,7 @@ pkg_postinst() {
 	ewarn "Pls test the feature how is decribe in the README of the project!"
 	ewarn "and also go to this issue in github: https://github.com/johnfanv2/LenovoLegionLinux/issues/46"
 
-    optfeature "radeon dgpu power management" dev-util/rocm-smi
-    optfeature "ryzen CPU tweaks" sys-power/RyzenAdj
-    optfeature "intel CPU tweaks" dev-python/undervolt
+	optfeature "radeon dgpu power management" dev-util/rocm-smi
+	optfeature "ryzen CPU tweaks" sys-power/RyzenAdj
+	optfeature "intel CPU tweaks" dev-python/undervolt
 }
