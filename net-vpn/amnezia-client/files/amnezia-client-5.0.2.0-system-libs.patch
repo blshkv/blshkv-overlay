@@ -1,0 +1,33 @@
+--- a/client/cmake/3rdparty.cmake
++++ b/client/cmake/3rdparty.cmake
+@@ -7,11 +7,7 @@
+
+ include(${CLIENT_ROOT_DIR}/3rd/qrcodegen/qrcodegen.cmake)
+
+-add_compile_definitions(_WINSOCKAPI_)
+-
+-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+-set(BUILD_WITH_QT6 ON)
+-add_subdirectory(${CLIENT_ROOT_DIR}/3rd/qtkeychain ${CMAKE_BINARY_DIR}/3rd/qtkeychain EXCLUDE_FROM_ALL)
++find_package(Qt6Keychain REQUIRED)
+
+ if(ANDROID)
+     # Use qtgamepad from amnezia-vpn/qtgamepad repository
+@@ -36,15 +32,10 @@
+     endif()
+ endif()
+
+-set(LIBS ${LIBS} qt6keychain)
+-
+-include_directories(
+-    ${CLIENT_ROOT_DIR}/3rd/qtkeychain/qtkeychain
+-    ${CMAKE_CURRENT_BINARY_DIR}/3rd/qtkeychain
+-)
++set(LIBS ${LIBS} Qt6Keychain::Qt6Keychain)
+
+ find_package(OpenSSL REQUIRED)
+ list(APPEND LIBS OpenSSL::SSL OpenSSL::Crypto)
+
+ find_package(libssh REQUIRED)
+-list(APPEND LIBS ssh::ssh)
++list(APPEND LIBS ssh)

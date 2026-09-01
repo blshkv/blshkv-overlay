@@ -1,0 +1,29 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,8 +11,6 @@
+ set(QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP ON CACHE BOOL "" FORCE)
+ set(CMAKE_PROJECT_TOP_LEVEL_INCLUDES
+     ${CMAKE_SOURCE_DIR}/cmake/platform_settings.cmake
+-    ${CMAKE_SOURCE_DIR}/cmake/recipes_bootstrap.cmake
+-    ${CMAKE_SOURCE_DIR}/cmake/conan_provider.cmake
+     CACHE STRING "" FORCE)
+
+ project(${PROJECT} VERSION ${AMNEZIAVPN_VERSION}
+@@ -20,7 +18,6 @@
+         HOMEPAGE_URL "https://amnezia.org/"
+ )
+
+-# trigger conan to kick off `conan install` globally
+ find_package(OpenSSL REQUIRED)
+ if (PREBUILTS_ONLY)
+     return()
+@@ -76,9 +73,6 @@
+
+ add_subdirectory(client)
+
+-if(NOT IOS AND NOT ANDROID AND NOT MACOS_NE)
+-    add_subdirectory(service)
+-endif()
+
+ if ((LINUX AND NOT ANDROID) OR (APPLE AND NOT IOS AND NOT MACOS_NE) OR (WIN32))
+     include(${CMAKE_SOURCE_DIR}/cmake/CPack.cmake)
