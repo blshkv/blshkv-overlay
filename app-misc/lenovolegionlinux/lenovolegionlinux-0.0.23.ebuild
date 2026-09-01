@@ -3,14 +3,20 @@
 
 EAPI=8
 
-DISTUTILS_USE_PEP517=setuptools
-PYTHON_COMPAT=(python3_{12..14})
-
 GITHUB_REPOSITORY="johnfanv2/LenovoLegionLinux"
 GITHUB_TAG="v${PV}"
+
+DISTUTILS_USE_PEP517=setuptools
+PYTHON_COMPAT=(python3_{12..14})
 inherit github-archive linux-mod-r1 distutils-r1 systemd optfeature
 
+MODULES_KERNEL_MIN=5.10
+
 DESCRIPTION="Lenovo Legion Linux kernel module"
+
+LICENSE="GPL-2"
+SLOT="0"
+IUSE="+gui downgrade-nvidia elogind"
 
 BDEPEND="
 	sys-kernel/linux-headers
@@ -22,22 +28,16 @@ BDEPEND="
 
 RDEPEND="
 	gui? (
-		dev-python/PyQt6[gui,widgets]
+		dev-python/pyqt6[gui,widgets]
 		dev-python/pyyaml
 		dev-python/argcomplete
 		dev-python/darkdetect
 		sys-power/acpid
 	)
-	downgrade-nvidia? ( <=x11-drivers/nvidia-drivers-525 )
+	downgrade-nvidia? ( <=x11-drivers/nvidia-drivers-525-r0 )
 "
 
 DEPEND="${RDEPEND}"
-
-LICENSE="GPL-2"
-SLOT="0"
-IUSE="+gui downgrade-nvidia elogind"
-
-MODULES_KERNEL_MIN=5.10
 
 src_compile() {
 	local modlist=(
@@ -63,9 +63,10 @@ src_install() {
 		cd python/legion_linux/ || die
 		distutils-r1_src_install --build-dir build
 
+		cd ../..
 		cd extra || die
 
-		systemd_dounit service/legiond.service service/legiond-onresume.service service/legiond-cpuset.service service/legiond-cpuset.timer
+		systemd_dounit service/{legiond.service,legiond-onresume.service,legiond-cpuset.service,legiond-cpuset.timer}
 
 		newinitd service/legiond.initd legiond
 		newinitd service/legiond-cpuset.initd legiond
@@ -101,5 +102,5 @@ pkg_postinst() {
 
 	optfeature "radeon dgpu power management" dev-util/rocm-smi
 	optfeature "ryzen CPU tweaks" sys-power/RyzenAdj
-	optfeature "intel CPU tweaks" dev-python/undervolt
+	optfeature "intel CPU tweaks" sys-power/intel-undervolt
 }
