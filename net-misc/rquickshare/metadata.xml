@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>blshkv@gmail.com</email>
+	</maintainer>
+	<longdescription>
+		rquickshare is a Rust implementation of Google's Quick Share (formerly
+		Nearby Share) protocol for Linux. It allows sending and receiving files
+		between Android devices and Linux machines using the same Quick Share
+		protocol. This package provides the core daemon (rquickshare) which
+		handles device discovery via mDNS and Bluetooth, and file transfer.
+	</longdescription>
+</pkgmetadata>
