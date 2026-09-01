@@ -1,0 +1,136 @@
+--- QNearbyShare-1.0.orig/libqnearbyshare-server/nearbyshare/cryptography/opensslcryptography.cpp	2026-09-01 10:08:10.950156413 +0800
++++ QNearbyShare-1.0/libqnearbyshare-server/nearbyshare/cryptography/opensslcryptography.cpp	2026-09-01 10:50:27.453562151 +0800
+@@ -30,6 +30,7 @@
+ #include <openssl/ec.h>
+ #include <openssl/evp.h>
+ #include <openssl/kdf.h>
++#include <openssl/params.h>
+ 
+ namespace OpenSSLSupport {
+     QByteArray bignumToBytes(BIGNUM* bn);
+@@ -42,26 +43,32 @@
+ };
+ 
+ EcKey* Cryptography::generateEcdsaKeyPair() {
+-    auto ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_EC, nullptr);
++    // Use the modern provider API. EVP_PKEY_CTX_new_id(EVP_PKEY_EC) is a legacy
++    // path that causes EVP_PKEY_set_type_by_keymgmt to free an invalid pointer
++    // in OpenSSL 3.x when the provider system has already been initialised.
++    auto ctx = EVP_PKEY_CTX_new_from_name(nullptr, "EC", nullptr);
+     if (ctx == nullptr) {
+         return nullptr;
+     }
+ 
+-    // Initialize the EVP context for key generation
+     if (EVP_PKEY_keygen_init(ctx) <= 0) {
+         EVP_PKEY_CTX_free(ctx);
+         return nullptr;
+     }
+ 
+-    // Set the EC curve for key generation
+-    if (EVP_PKEY_CTX_set_ec_paramgen_curve_nid(ctx, NID_X9_62_prime256v1) <= 0) {
++    OSSL_PARAM params[] = {
++        OSSL_PARAM_construct_utf8_string(OSSL_PKEY_PARAM_GROUP_NAME,
++                                          const_cast<char*>("prime256v1"), 0),
++        OSSL_PARAM_construct_end()
++    };
++
++    if (EVP_PKEY_CTX_set_params(ctx, params) <= 0) {
+         EVP_PKEY_CTX_free(ctx);
+         return nullptr;
+     }
+ 
+-    // Generate the ECDSA key pair
+-    EVP_PKEY* clientKey;
+-    if (EVP_PKEY_keygen(ctx, &clientKey) <= 0) {
++    EVP_PKEY* clientKey = nullptr;
++    if (EVP_PKEY_generate(ctx, &clientKey) <= 0) {
+         EVP_PKEY_CTX_free(ctx);
+         return nullptr;
+     }
+@@ -97,17 +104,35 @@
+     auto bnX = OpenSSLSupport::bytesToBignum(peerX);
+     auto bnY = OpenSSLSupport::bytesToBignum(peerY);
+ 
+-    EC_KEY* ecPeerKey = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
+-    if (!EC_KEY_set_public_key_affine_coordinates(ecPeerKey, bnX, bnY)) {
+-        BN_free(bnX);
+-        BN_free(bnY);
+-        return {};
+-    }
++    // Build uncompressed EC point: 0x04 || X (32 bytes) || Y (32 bytes)
++    QByteArray pubPoint(65, '\0');
++    pubPoint[0] = 0x04;
++    BN_bn2binpad(bnX, reinterpret_cast<unsigned char*>(pubPoint.data() + 1), 32);
++    BN_bn2binpad(bnY, reinterpret_cast<unsigned char*>(pubPoint.data() + 33), 32);
+     BN_free(bnX);
+     BN_free(bnY);
+ 
+-    auto peerKey = EVP_PKEY_new();
+-    EVP_PKEY_assign_EC_KEY(peerKey, ecPeerKey);
++    // Create peer key via the modern provider API so it is compatible with ourKey->key
++    // which was created by EVP_PKEY_keygen. Mixing a legacy EC_KEY-wrapped EVP_PKEY with
++    // a provider-based key in EVP_PKEY_derive_set_peer fails silently in OpenSSL 3.x.
++    OSSL_PARAM params[] = {
++        OSSL_PARAM_construct_utf8_string(OSSL_PKEY_PARAM_GROUP_NAME,
++                                          const_cast<char*>("prime256v1"), 0),
++        OSSL_PARAM_construct_octet_string(OSSL_PKEY_PARAM_PUB_KEY,
++                                          pubPoint.data(), static_cast<size_t>(pubPoint.size())),
++        OSSL_PARAM_construct_end()
++    };
++
++    auto keyCtx = EVP_PKEY_CTX_new_from_name(nullptr, "EC", nullptr);
++    if (!keyCtx) return {};
++
++    EVP_PKEY* peerKey = nullptr;
++    if (EVP_PKEY_fromdata_init(keyCtx) <= 0 ||
++        EVP_PKEY_fromdata(keyCtx, &peerKey, EVP_PKEY_PUBLIC_KEY, params) <= 0) {
++        EVP_PKEY_CTX_free(keyCtx);
++        return {};
++    }
++    EVP_PKEY_CTX_free(keyCtx);
+ 
+     /* Create the context for the shared secret derivation */
+     auto ctx = EVP_PKEY_CTX_new(ourKey->key, nullptr);
+@@ -116,15 +141,8 @@
+         return {};
+     }
+ 
+-    /* Initialise */
+-    if (EVP_PKEY_derive_init(ctx) <= 0) {
+-        EVP_PKEY_CTX_free(ctx);
+-        EVP_PKEY_free(peerKey);
+-        return {};
+-    }
+-
+-    /* Provide the peer public key */
+-    if (EVP_PKEY_derive_set_peer(ctx, peerKey) <= 0) {
++    if (EVP_PKEY_derive_init(ctx) <= 0 ||
++        EVP_PKEY_derive_set_peer(ctx, peerKey) <= 0) {
+         EVP_PKEY_CTX_free(ctx);
+         EVP_PKEY_free(peerKey);
+         return {};
+@@ -224,6 +242,7 @@
+ }
+ 
+ void Cryptography::deleteEcdsaKeyPair(EcKey* key) {
++    EVP_PKEY_free(key->key);
+     delete key;
+ }
+ 
+@@ -251,10 +270,11 @@
+      * 1001 -> 1000 -> 0111 -> -7
+      */
+ 
+-    // Pad with 0 if not already padded
+-    numData.prepend('\0');
+-    //    if (numData.at(0) & 80) {
+-    //    }
++    // Only prepend a zero byte when the high bit is set, matching the signed
++    // big-integer encoding Java's BigInteger.toByteArray() uses (which Android sends).
++    if (bnBytes > 0 && (static_cast<unsigned char>(numData.at(0)) & 0x80)) {
++        numData.prepend('\0');
++    }
+ 
+     return numData;
+ }

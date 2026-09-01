@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>blshkv@gmail.com</email>
+	</maintainer>
+	<longdescription>
+		QNearbyShare is a Linux implementation of Google's Nearby Share protocol,
+		allowing file transfers between Android devices and Linux desktops.
+		It provides a daemon (qnearbyshared) and CLI tools for sending and
+		receiving files.
+	</longdescription>
+	<use>
+		<flag name="openssl">Use OpenSSL for cryptography instead of Crypto++</flag>
+	</use>
+</pkgmetadata>
