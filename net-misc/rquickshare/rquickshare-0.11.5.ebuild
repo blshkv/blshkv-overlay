@@ -316,6 +316,7 @@ src_prepare() {
 
 	# core_bin has no UI to handle transfer consent requests. Subscribe to the
 	# broadcast channel and auto-accept all incoming transfers in daemon mode.
+	# https://github.com/Martichou/rquickshare/pull/441
 	eapply "${FILESDIR}/${P}-auto-accept.patch"
 }
 
