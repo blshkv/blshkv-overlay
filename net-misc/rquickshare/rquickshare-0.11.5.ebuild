@@ -287,8 +287,7 @@ LICENSE="AGPL-3"
 # Dependent crate licenses
 LICENSE+=" Apache-2.0 BSD-2 BSD MIT MPL-2.0 Unicode-DFS-2016"
 SLOT="0"
-# does not work, "Unhandled offline frame encrypted"
-#KEYWORDS="amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	sys-apps/dbus
