@@ -13,4 +13,7 @@
 	<use>
 		<flag name="openssl">Use OpenSSL for cryptography instead of Crypto++</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">vicr123/QNearbyShare</remote-id> 
+	</upstream>
 </pkgmetadata>

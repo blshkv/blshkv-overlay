@@ -39,6 +39,8 @@ src_prepare() {
 	rmdir "${S}/libqnearbyshare-server/QtZeroConf" || die
 	mv "${WORKDIR}/QtZeroConf-${QTZEROCONF_COMMIT}" \
 		"${S}/libqnearbyshare-server/QtZeroConf" || die
+
+	# https://github.com/vicr123/QNearbyShare/pull/19
 	eapply "${FILESDIR}/${P}-openssl-fixes.patch"
 	cmake_src_prepare
 }
