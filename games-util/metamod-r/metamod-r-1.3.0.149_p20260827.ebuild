@@ -4,18 +4,13 @@
 EAPI=8
 
 GITHUB_REPOSITORY="rehlds/Metamod-R"
-GITHUB_COMMIT="4db16ff6edb8f68b4b5782713934bac2e88433f9"
+GITHUB_COMMIT="6e4329c28a30ba335e93e95172fbc06272b91439"
 inherit github-archive cmake
 
 DESCRIPTION="Improved plugin management and compatibility on modern HLDS-based servers"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-
-src_prepare() {
-	eapply "${FILESDIR}/${P}-ldflags.patch"
-	cmake_src_prepare
-}
 
 src_install() {
 	insinto /opt/Steam/metamod/
