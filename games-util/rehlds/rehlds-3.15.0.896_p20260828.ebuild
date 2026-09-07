@@ -4,7 +4,7 @@
 EAPI=8
 
 GITHUB_REPOSITORY="rehlds/ReHLDS"
-GITHUB_TAG="${PV}"
+GITHUB_COMMIT="6266cd23faee4a6e9cf3974f9605b2cadd86f0a4"
 inherit github-archive cmake flag-o-matic
 
 DESCRIPTION="Enhanced version of the HLDS engine"
@@ -23,6 +23,11 @@ QA_TEXTRELS="
 	opt/Steam/rehlds/valve/dlls/director.so
 "
 
+# engine_i486.so and proxy.so link against libsteam_api.so, a proprietary Valve
+# library that ships inside the Steam client and has no Gentoo package. Portage
+# will print "Unresolved soname dependencies" for these files; there is no QA
+# variable to suppress it — accept it as a known, harmless notice.
+
 # Legacy game server executables require executable stack
 QA_EXECSTACK="
 	opt/Steam/rehlds/hlds_linux
@@ -30,15 +35,15 @@ QA_EXECSTACK="
 "
 
 src_prepare() {
-	eapply "${FILESDIR}/${P}-notext.patch"
-	eapply "${FILESDIR}/${P}-no-hardcoded-lto.patch"
-	eapply "${FILESDIR}/${P}-sigaction-init.patch"
+	# https://github.com/rehlds/ReHLDS/pull/1194
+	eapply "${FILESDIR}/rehlds-3.15.0.896-no-hardcoded-lto.patch"
 	cmake_src_prepare
 }
 
 src_configure() {
-	# i386 shared libs are intentionally built without -fPIC; LTO causes the
-	# linker to generate text relocations which modern ld rejects as an error.
+	# i386 shared libs built without -fPIC produce text relocations. Unlike
+	# regamedll_cs, there is no -Wl,-z,notext in the build system to allow them,
+	# so LTO causes the linker to reject the build with a hard error.
 	filter-lto
 	local mycmakeargs=(
 		-DDEBUG=$(usex debug ON OFF)
