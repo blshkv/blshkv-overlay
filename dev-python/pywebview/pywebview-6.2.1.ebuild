@@ -14,12 +14,10 @@ HOMEPAGE="https://github.com/r0x0r/pywebview"
 LICENSE="BSD"
 SLOT="0"
 
-#dev-python/PyQtWebEngine ~x86 only
-KEYWORDS="amd64 arm64 ~x86"
+KEYWORDS="amd64 arm64 x86"
 
-# copy USE flags from dev-python/QtPy
-IUSE="gtk +pyqt5"
-REQUIRED_USE="|| ( gtk pyqt5 )"
+IUSE="gtk +qt"
+REQUIRED_USE="|| ( gtk qt )"
 
 RDEPEND="
 	dev-python/proxy_tools[${PYTHON_USEDEP}]
@@ -31,21 +29,12 @@ RDEPEND="
 		dev-python/pygobject[cairo,${PYTHON_USEDEP}]
 		net-libs/webkit-gtk
 	)
-	pyqt5? (
+	qt? (
 		dev-python/qtpy[${PYTHON_USEDEP},webengine]
-		dev-python/pyqt5[${PYTHON_USEDEP}]
-		dev-python/pyqtwebengine[${PYTHON_USEDEP}]
+		dev-python/pyqt6[${PYTHON_USEDEP}]
+		dev-python/pyqt6-webengine[${PYTHON_USEDEP}]
 	)
 	"
-#	qt5? (
-#		dev-python/pyside2[${PYTHON_USEDEP},webengine]
-#		dev-python/QtPy[${PYTHON_USEDEP},webengine]
-#	)
-#	qt6? (
-#		dev-python/pyside6[${PYTHON_USEDEP},webengine]
-#		dev-python/QtPy[${PYTHON_USEDEP},webengine]
-#	)
-#"
 
 distutils_enable_tests pytest
 
