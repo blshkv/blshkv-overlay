@@ -68,3 +68,7 @@ dev-ruby/action_text-trix
 ~virtual/rubygems-22
 ~dev-ruby/resolv-replace-0.2.0
 ~dev-ruby/ipaddr-1.2.8
+
+#required by "grape-swagger-rails"
+=dev-ruby/haml-rails-2*
+=dev-ruby/haml-7.2*

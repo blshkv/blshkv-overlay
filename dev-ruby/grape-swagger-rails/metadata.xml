@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<longdescription>
+		Mounts the Swagger UI as a Rails engine, providing a browser interface
+		for APIs documented with grape-swagger.
+	</longdescription>
+</pkgmetadata>
