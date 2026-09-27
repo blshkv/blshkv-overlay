@@ -9,6 +9,7 @@ MY_P="redis-rb-${PV}"
 
 RUBY_FAKEGEM_EXTRADOC="CHANGELOG.md README.md"
 RUBY_FAKEGEM_BINWRAP=""
+RUBY_FAKEGEM_GEMSPEC="redis.gemspec"
 
 inherit ruby-fakegem
 
@@ -23,4 +24,11 @@ KEYWORDS="amd64 ~arm64"
 RUBY_S="${MY_P}"
 
 ruby_add_rdepend "=dev-ruby/redis-client-0.30*"
+
+all_ruby_prepare() {
+	sed -i \
+		-e '/require.*version/d' \
+		-e 's/Redis::VERSION/"6.0.0"/' \
+		${RUBY_FAKEGEM_GEMSPEC} || die
+}
 

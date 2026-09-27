@@ -6,6 +6,7 @@ EAPI=8
 USE_RUBY="ruby32 ruby33 ruby34 ruby40"
 
 RUBY_FAKEGEM_EXTRADOC="CHANGELOG.md README.md"
+RUBY_FAKEGEM_GEMSPEC="redis-client.gemspec"
 
 inherit ruby-fakegem
 
@@ -18,4 +19,12 @@ SLOT="0"
 KEYWORDS="amd64 ~arm64"
 
 ruby_add_rdepend ">=dev-ruby/connection_pool-2.3:3"
+
+all_ruby_prepare() {
+	sed -i \
+		-e '/require_relative.*version/d' \
+		-e 's/RedisClient::VERSION/"0.30.1"/' \
+		-e '/spec\.files = Dir\.chdir/,/^  end$/d' \
+		${RUBY_FAKEGEM_GEMSPEC} || die
+}
 
