@@ -72,3 +72,6 @@ dev-ruby/action_text-trix
 #required by "grape-swagger-rails"
 =dev-ruby/haml-rails-2*
 =dev-ruby/haml-7.2*
+
+# required by redis-6
+=dev-ruby/connection_pool-3.0*

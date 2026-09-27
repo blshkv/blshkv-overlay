@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<longdescription>
+		A simple low-level client for Redis, extracted from the redis gem as its
+		new network layer for redis 5+.
+	</longdescription>
+</pkgmetadata>
