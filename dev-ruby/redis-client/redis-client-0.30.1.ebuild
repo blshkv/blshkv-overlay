@@ -6,7 +6,6 @@ EAPI=8
 USE_RUBY="ruby32 ruby33 ruby34 ruby40"
 
 RUBY_FAKEGEM_EXTRADOC="CHANGELOG.md README.md"
-RUBY_FAKEGEM_GEMSPEC="redis-client.gemspec"
 
 inherit ruby-fakegem
 
@@ -20,6 +19,3 @@ KEYWORDS="amd64 ~arm64"
 
 ruby_add_rdepend ">=dev-ruby/connection_pool-2.3:3"
 
-all_ruby_prepare() {
-	sed -i -e 's/git ls-files --/echo/' ${RUBY_FAKEGEM_GEMSPEC} || die
-}
