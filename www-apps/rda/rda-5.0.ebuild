@@ -41,5 +41,5 @@ RDEPEND="${RUBY_DEPS}
 	dev-ruby/will_paginate:*
 	media-gfx/imagemagick[png,jpeg,webp]
 	dev-ruby/grape-swagger
-	dev-ruby/redis:6
+	dev-ruby/redis:5
 "
