@@ -41,6 +41,10 @@ BDEPEND="
 EPYTEST_PLUGINS=( pytest-{asyncio,timeout} )
 distutils_enable_tests pytest
 
+PATCHES=(
+	"${FILESDIR}/${P}-cython-3.3.patch"
+)
+
 src_prepare() {
 	sed -i 's/<3\.3\.0/<3.4/g' pyproject.toml || die
 	distutils-r1_src_prepare
