@@ -25,9 +25,10 @@ SLOT="0"
 KEYWORDS="amd64 ~riscv"
 IUSE="+native-extensions"
 
-# Cython <3.3.0 upper bound dropped; Cython 3.3.0 released and builds cleanly.
+# Upstream caps at <3.3.0 but Cython 3.3.0 builds cleanly; bumped to <3.4 as precaution.
 # https://github.com/Bluetooth-Devices/dbus-fast/issues/808
 BDEPEND="
+	<dev-python/cython-3.4[${PYTHON_USEDEP}]
 	>=dev-python/cython-3[${PYTHON_USEDEP}]
 	>=dev-python/setuptools-65.4.1[${PYTHON_USEDEP}]
 	test? (
@@ -39,6 +40,11 @@ BDEPEND="
 
 EPYTEST_PLUGINS=( pytest-{asyncio,timeout} )
 distutils_enable_tests pytest
+
+src_prepare() {
+	sed -i 's/<3\.3\.0/<3.4/g' pyproject.toml || die
+	distutils-r1_src_prepare
+}
 
 src_configure() {
 	export REQUIRE_CYTHON=1
