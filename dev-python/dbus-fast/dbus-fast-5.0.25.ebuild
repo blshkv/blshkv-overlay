@@ -25,7 +25,7 @@ SLOT="0"
 KEYWORDS="amd64 ~riscv"
 IUSE="+native-extensions"
 
-# Upstream caps at <3.3.0 but Cython 3.3.0 builds cleanly; bumped to <3.4 as precaution.
+# Cython 3.3.0 requires source fixes (see patch); cap raised to <3.4 as precaution.
 # https://github.com/Bluetooth-Devices/dbus-fast/issues/808
 BDEPEND="
 	<dev-python/cython-3.4[${PYTHON_USEDEP}]
@@ -44,7 +44,6 @@ distutils_enable_tests pytest
 PATCHES=(
 	"${FILESDIR}/${P}-cython-3.3.patch"
 )
-
 
 src_configure() {
 	export REQUIRE_CYTHON=1
