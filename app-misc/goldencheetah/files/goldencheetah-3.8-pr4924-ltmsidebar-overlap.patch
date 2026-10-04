@@ -1,0 +1,45 @@
+From: https://github.com/GoldenCheetah/GoldenCheetah/pull/4924
+Subject: Fix shared Trends/Plan sidebar overlapping the main menu bar
+
+LTMSidebar is shared between TrendsView and PlanView and is only
+reparented into the current view's splitter when that view's showEvent()
+calls setSidebar(). If the app starts on a different view (Analysis is
+the common case), the unembedded sidebar is an invisible bare child of
+MainWindow — but not hidden — and renders as a stray widget at (0,0) on
+top of the menu bar, hiding the first menu item.
+
+Fix: hide() at the end of LTMSidebar's constructor; sidebar->show() in
+AbstractView::setSidebar() once the widget is properly embedded.
+
+--- a/src/Gui/AbstractView.cpp
++++ b/src/Gui/AbstractView.cpp
+@@ -187,6 +187,11 @@
+         // if the sidebar widget is already attached to another view's splitter,
+         // it is moved to the new position within this view's splitter
+         splitter->insertWidget(0, sidebar);
++
++        // a shared sidebar (see LTMSidebar) is kept hidden while it is not
++        // embedded anywhere; make sure it is actually shown now that it is
++        // properly parented into this view's splitter
++        sidebar->show();
+     } 
+ 
+     configChanged(CONFIG_APPEARANCE);
+--- a/src/Gui/LTMSidebar.cpp
++++ b/src/Gui/LTMSidebar.cpp
+@@ -255,6 +255,15 @@
+ 
+     // setup colors
+     configChanged(CONFIG_APPEARANCE);
++
++    // This sidebar is shared between TrendsView and PlanView (see LTMSidebarView)
++    // and is only reparented into the current view's splitter when that view's
++    // showEvent() calls setSidebar() -- see AbstractView::setSidebar(). Until
++    // then it is just a bare child of MainWindow, not managed by any layout, so
++    // if the application happens to start on a different view (e.g. Analysis)
++    // it would otherwise render as a stray overlapping widget at (0,0), on top
++    // of the menu bar. Keep it hidden until setSidebar() embeds and shows it.
++    hide();
+ }
+ 
+ void

@@ -75,6 +75,7 @@ src_prepare() {
 	use oauth && pkgs+=" oauth"
 	sed -i "s|^#*PKGCONFIG =.*|PKGCONFIG = ${pkgs}|" src/gcconfig.pri
 
+	eapply "${FILESDIR}/${P}-pr4924-ltmsidebar-overlap.patch"
 	eapply_user
 }
 
