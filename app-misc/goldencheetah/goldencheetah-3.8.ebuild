@@ -3,17 +3,11 @@
 
 EAPI=8
 
-MY_PV="${PV//_rc/-RC}"
-MY_P="GoldenCheetah"
-
-inherit qmake-utils desktop
-
-HASH_COMMIT="c569ac45f439aac1bcf2dd1cb7f51968c3f517fd"
+GITHUB_REPOSITORY="GoldenCheetah/GoldenCheetah"
+inherit github-archive qmake-utils desktop
 
 DESCRIPTION="Performance Software for Cyclists, Runners, Triathletes and Coaches"
-HOMEPAGE="https://www.goldencheetah.org/ https://github.com/GoldenCheetah/GoldenCheetah"
-SRC_URI="https://github.com/GoldenCheetah/GoldenCheetah/archive/${HASH_COMMIT}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}"/${MY_P}-${HASH_COMMIT}
+HOMEPAGE="https://www.goldencheetah.org/ ${HOMEPAGE}"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -36,8 +30,9 @@ RDEPEND="sys-devel/flex
 	dev-qt/qtconnectivity:6
 	x11-libs/qwt:6
 
-	virtual/opengl
+	virtual/glu
 	sci-libs/gsl
+	dev-libs/libical
 
 	oauth? ( net-libs/liboauth )
 "
@@ -47,10 +42,8 @@ DEPEND="${RDEPEND}"
 #2. ADDING OPTIONAL DEPENDENCIES
 #   - FTDI D2XX
 #   - SRMIO
-#   - liboauth
 #   - libkml
 #   - libvlc  - Video playback in training mode
-#   - libical - Diary window and CalDAV support (external calendar integration)
 #   - libusb  - If you want support for using USB2 sticks in Train View
 #   - R       - If you want R charts
 #   - Python  - If you want Python charts, scripts and data processors
@@ -75,19 +68,26 @@ src_prepare() {
 	sed -i '/QMAKE_MOVE = cp/s/^#//g' src/gcconfig.pri
 	sed -i '/LIBZ_INCLUDE/s/^#//g' src/gcconfig.pri
 	sed -i '/LIBZ_LIBS/s/^#//g' src/gcconfig.pri
+
+	# Enable pkg-config and add mandatory libical; append oauth when USE=oauth
+	sed -i '/CONFIG.*link_pkgconfig/s/^#//g' src/gcconfig.pri
+	local pkgs="libical"
+	use oauth && pkgs+=" oauth"
+	sed -i "s|^#*PKGCONFIG =.*|PKGCONFIG = ${pkgs}|" src/gcconfig.pri
+
 	eapply_user
 }
 
 src_configure() {
 	eqmake6 -recursive
 }
+
 src_compile() {
-	eqmake6 -recursive
 	emake
 }
 
 src_install() {
-	newbin src/${MY_P} goldencheetah
+	newbin src/GoldenCheetah goldencheetah
 	make_desktop_entry ${PN} "GoldenCheetah" goldencheetah.png "Science;Sports;"
 	doicon "${FILESDIR}"/goldencheetah.png
 }
