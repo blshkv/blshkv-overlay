@@ -3,10 +3,15 @@
 
 EAPI=8
 
+GITHUB_REPOSITORY="isene/bare"
+#GITHUB_COMMIT="6d65c79f27afca2a4a61f069ff2c963d35f897ab"
+
+inherit github-archive
+
 DESCRIPTION="Interactive shell in x86_64 Linux assembly, no libc, pure syscalls"
-HOMEPAGE="https://github.com/isene/bare"
-SRC_URI="https://github.com/isene/bare/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
-S="${WORKDIR}/bare-${PV}"
+#HOMEPAGE="https://github.com/isene/bare"
+#SRC_URI="https://github.com/isene/bare/archive/refs/tags/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+#S="${WORKDIR}/bare-${PV}"
 
 LICENSE="Unlicense"
 SLOT="0"
