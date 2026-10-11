@@ -20,6 +20,7 @@ RDEPEND="${RUBY_DEPS}
 	|| ( dev-ruby/activerecord:7.2 dev-ruby/activerecord:7.1 )
 	dev-ruby/activerecord-session_store
 	dev-ruby/bootstrap
+	dev-ruby/cvss-suite
 	dev-ruby/grape
 	dev-ruby/grape-active_model_serializers
 	dev-ruby/image_processing
@@ -40,4 +41,6 @@ RDEPEND="${RUBY_DEPS}
 	dev-ruby/turbo-rails
 	dev-ruby/will_paginate:*
 	media-gfx/imagemagick[png,jpeg,webp]
+	dev-ruby/grape-swagger
+	dev-ruby/redis:5
 "
