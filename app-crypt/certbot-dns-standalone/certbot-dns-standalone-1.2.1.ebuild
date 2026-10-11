@@ -13,13 +13,12 @@ HOMEPAGE="https://pypi.org/project/certbot-dns-standalone/ https://github.com/si
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
-PATCHES="${FILESDIR}/${P}-remove-mock-dep.patch"
+PATCHES=( "${FILESDIR}/${P}-remove-mock-dep.patch" )
 
 RDEPEND="
 	>=app-crypt/certbot-3.0.0[${PYTHON_USEDEP}]
-	>=app-crypt/acme-0.21.1[${PYTHON_USEDEP}]
 	>=dev-python/dnslib-0.9.0[${PYTHON_USEDEP}]
 "
 
