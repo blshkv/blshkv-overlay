@@ -1,0 +1,36 @@
+How to setup openrc:
+--------------------
+  # cgroup v1 or v2?
+  ls /sys/fs/cgroup/
+  # if unified (v2 only), Android needs v1 subsystems
+  cat /proc/mounts | grep cgroup
+
+  # for OpenRC (no systemd), add this to /etc/rc.conf or boot loader:
+  rc_cgroup_mode="hybrid"
+
+  Waydroid needs kernel 5.10+ with CONFIG_ANDROID_BINDER_IPC and CONFIG_ANDROID_BINDERFS enabled.
+
+  root:
+    waydroid init
+  regular user:
+    sudo waydroid-nvidia-setup
+  check config:
+    /var/lib/waydroid/waydroid.cfg
+      nvidia_venus_socket = /run/user/1000/waydroid-venus/venus.sock
+      1000 - your userId, echo $XDG_RUNTIME_DIR
+
+  root:
+  /etc/init.d/waydroid start
+    quick start:
+      rc-service waydroid start
+    autostart:
+      rc-update add waydroid default
+
+  regular user:
+    quick start:
+      waydroid-nvidia/files/wd-venus.sh
+    autostart:
+      copy files/wd-venus.desktop ~/.config/autostart/wd-venus.desktop
+
+  waydroid session start
+  waydroid show-full-ui
