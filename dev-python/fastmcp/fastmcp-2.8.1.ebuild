@@ -15,11 +15,14 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
+PATCHES=( "${FILESDIR}/${P}-pydantic-2.13-compat.patch" )
+
 RDEPEND="
 	>=dev-python/python-dotenv-1.1.0[${PYTHON_USEDEP}]
 	>=dev-python/exceptiongroup-1.2.2[${PYTHON_USEDEP}]
 	>=dev-python/httpx-0.28.1[${PYTHON_USEDEP}]
 	>=dev-python/mcp-1.9.4[${PYTHON_USEDEP}]
+	<dev-python/mcp-2.0.0[${PYTHON_USEDEP}]
 	>=dev-python/openapi-pydantic-0.5.1[${PYTHON_USEDEP}]
 	>=dev-python/rich-13.9.4[${PYTHON_USEDEP}]
 	>=dev-python/typer-0.15.2[${PYTHON_USEDEP}]

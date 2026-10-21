@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<use>
+		<flag name="filetree">Enable async filesystem backend via dev-python/aiofile</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">akettmann/py-key-value-aio</remote-id>
+		<remote-id type="pypi">py-key-value-aio</remote-id>
+	</upstream>
+</pkgmetadata>

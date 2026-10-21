@@ -2,7 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<upstream>
-		<remote-id type="github">modelcontextprotocol/python-sdk</remote-id>
-		<remote-id type="pypi">mcp</remote-id>
+		<remote-id type="github">chrisguidry/uncalled-for</remote-id>
+		<remote-id type="pypi">uncalled-for</remote-id>
 	</upstream>
 </pkgmetadata>
