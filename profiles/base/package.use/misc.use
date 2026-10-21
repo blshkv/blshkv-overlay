@@ -10,3 +10,6 @@ net-vpn/openvpn kernel-ovpn
 
 # required by sci-electronics/rd-usb
 dev-python/qtpy webengine
+
+# required by app-containers/waydroid
+sys-libs/libcap static-libs

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM 'https://www.gentoo.org/dtd/metadata.dtd'>
+<pkgmetadata>
+	<maintainer type="person">
+		<email>blshkv@gmail.com</email>
+		<name>Anton Bolshakov</name>
+	</maintainer>
+	<longdescription>
+		A drop-in replacement for app-containers/waydroid that patches the
+		waydroid Python application and ships pre-built host and guest GPU
+		driver stacks to enable full NVIDIA GPU acceleration in the Android
+		container. The host side runs a Mesa Venus vtest render server; the
+		guest side uses a Mesa Venus Vulkan HAL and ANGLE OpenGL-over-Vulkan
+		to forward all rendering to the host NVIDIA driver over a Unix socket.
+		Supports GTX 900 through RTX 50 series cards via the nvidia-open
+		kernel modules.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">Shiro836/waydroid-nvidia</remote-id>
+	</upstream>
+</pkgmetadata>
