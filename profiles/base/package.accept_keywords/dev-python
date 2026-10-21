@@ -4,3 +4,7 @@
 ~dev-python/pydevd-3.4.1
 
 ~dev-python/authlib-1.9.1
+
+# gentoo has: ~dev-python/authlib
+~net-misc/migadu-mcp-3.6.1
+~dev-python/fastmcp-2.8.1
