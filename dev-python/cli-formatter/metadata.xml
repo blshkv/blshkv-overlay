@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<upstream>
+		<remote-id type="github">wahlflo/cli-formatter</remote-id>
+		<remote-id type="pypi">cli-formatter</remote-id>
+	</upstream>
+</pkgmetadata>
