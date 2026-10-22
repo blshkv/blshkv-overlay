@@ -16,8 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	>=dev-python/fastmcp-2.8.1[${PYTHON_USEDEP}]
-	>=dev-python/httpx-0.28.1[${PYTHON_USEDEP}]
+	>=dev-python/fastmcp-4.1.3[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-2.0.0[${PYTHON_USEDEP}]
 	>=dev-python/email-validator-2.0.0[${PYTHON_USEDEP}]
 "
