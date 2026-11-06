@@ -12,7 +12,7 @@ HOMEPAGE="https://github.com/blshkv/coospo-cli https://pypi.org/project/coospo-c
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="amd64 arm arm64"
-IUSE="openrc strava systemd test"
+IUSE="strava systemd test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -23,7 +23,7 @@ distutils_enable_tests pytest
 src_install() {
 	distutils-r1_src_install
 
-	if use openrc; then
+	if ! use systemd; then
 		newinitd "${S}/contrib/openrc/coospo" coospo
 	fi
 
