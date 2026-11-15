@@ -11,20 +11,20 @@ dev-ruby/coffee-rails:5.0
 =dev-ruby/colorize-1.1*
 
 # rails should match with the stable: dev-ruby/activesupport
-dev-ruby/rails:7.2
-dev-ruby/railties:7.2
-dev-ruby/actioncable:7.2
-dev-ruby/actionmailbox:7.2
-dev-ruby/actionmailer:7.2
-dev-ruby/actionpack:7.2
-dev-ruby/actiontext:7.2
-dev-ruby/actionview:7.2
-dev-ruby/activejob:7.2
-dev-ruby/activemodel:7.2
-dev-ruby/activerecord:7.2
-dev-ruby/activestorage:7.2
-dev-ruby/activesupport:7.2
-~app-eselect/eselect-rails-0.29
+dev-ruby/rails:8.1
+dev-ruby/railties:8.1
+dev-ruby/actioncable:8.1
+dev-ruby/actionmailbox:8.1
+dev-ruby/actionmailer:8.1
+dev-ruby/actionpack:8.1
+dev-ruby/actiontext:8.1
+dev-ruby/actionview:8.1
+dev-ruby/activejob:8.1
+dev-ruby/activemodel:8.1
+dev-ruby/activerecord:8.1
+dev-ruby/activestorage:8.1
+dev-ruby/activesupport:8.1
+~app-eselect/eselect-rails-0.30
 
 =dev-ruby/marcel-1.0*
 dev-ruby/websocket-driver:0.7

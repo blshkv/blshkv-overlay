@@ -1,0 +1,46 @@
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+USE_RUBY="ruby33 ruby34 ruby40"
+
+inherit ruby-single
+
+DESCRIPTION="Web-based application for effective reporting writing"
+HOMEPAGE="https://www.google.com"
+
+LICENSE="default_evil"
+SLOT="0"
+KEYWORDS="amd64"
+IUSE="mysql mariadb"
+
+RDEPEND="${RUBY_DEPS}
+	dev-ruby/action_text-trix
+	|| ( dev-ruby/rails:8.1 dev-ruby/rails:8.0 )
+	|| ( dev-ruby/activerecord:8.1 dev-ruby/activerecord:8.0 )
+	dev-ruby/activerecord-session_store
+	dev-ruby/bootstrap
+	dev-ruby/cvss-suite
+	dev-ruby/grape
+	dev-ruby/grape-active_model_serializers
+	dev-ruby/image_processing
+	dev-ruby/importmap-rails:*
+	dev-ruby/jbuilder
+	dev-ruby/jquery-rails:*
+	dev-ruby/jquery-ui-rails:*
+	dev-ruby/kramdown-parser-gfm
+	dev-ruby/mysql2[mysql?,mariadb?]
+	dev-ruby/rack-cors
+	dev-ruby/rake
+	dev-ruby/ransack
+	dev-ruby/sablon
+	dev-ruby/sass-rails:*
+	dev-ruby/similar_text
+	dev-ruby/stimulus-rails
+	dev-ruby/turbo-rails
+	dev-ruby/will_paginate:*
+	media-gfx/imagemagick[png,jpeg,webp]
+	dev-ruby/grape-swagger
+	dev-ruby/redis:5
+"
