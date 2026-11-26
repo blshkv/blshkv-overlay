@@ -18,6 +18,10 @@ KEYWORDS="amd64"
 IUSE="fuse +ldap mariadb mysql psd saml"
 
 # https://manual.seafile.com/13.0/changelog/changelog-for-seafile-professional-server/
+#scikit-learn   │ ==1.7.*    │ missing
+#boto3          │ (unpinned) │ missing (S3 storage)
+#oss2           │ (unpinned) │ missing (Alibaba OSS)
+#twilio         │ (unpinned) │ missing (SMS)
 
 RDEPEND="${PYTHON_DEPS}
 	$(python_gen_cond_dep '
@@ -32,7 +36,10 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/pymysql[${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
-	dev-python/ldap3[${PYTHON_USEDEP}]
+	dev-python/python-ldap[${PYTHON_USEDEP}]
+	dev-python/pyjwt[${PYTHON_USEDEP}]
+	dev-python/cairosvg[${PYTHON_USEDEP}]
+	dev-python/pytz[${PYTHON_USEDEP}]
 
 	dev-python/lxml[${PYTHON_USEDEP}]
 
