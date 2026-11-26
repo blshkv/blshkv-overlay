@@ -32,7 +32,6 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/pillow-heif[${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
-	dev-python/python-ldap[${PYTHON_USEDEP}]
 
 	dev-python/lxml[${PYTHON_USEDEP}]
 

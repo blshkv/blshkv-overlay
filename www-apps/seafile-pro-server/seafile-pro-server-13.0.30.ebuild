@@ -36,7 +36,6 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/pymysql[${PYTHON_USEDEP}]
 	psd? ( dev-python/psd-tools )
 	dev-python/django-pylibmc[${PYTHON_USEDEP}]
-	dev-python/python-ldap[${PYTHON_USEDEP}]
 	dev-python/pyjwt[${PYTHON_USEDEP}]
 	dev-python/cairosvg[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
