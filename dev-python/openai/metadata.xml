@@ -10,6 +10,10 @@
     <remote-id type="pypi">openai</remote-id>
   </upstream>
   <use>
+    <flag name="aiohttp">Enable aiohttp HTTP transport support</flag>
+    <flag name="bedrock">Enable Amazon Bedrock provider support</flag>
     <flag name="datalib">Make data libraries like `numpy` and `pandas` optional dependencies (130MB+)</flag>
+    <flag name="realtime">Enable WebSocket Realtime API support</flag>
+    <flag name="vertex">Enable Google Vertex AI provider support</flag>
   </use>
 </pkgmetadata>
